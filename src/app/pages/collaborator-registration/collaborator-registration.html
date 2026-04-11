@@ -1,0 +1,33 @@
+<div class="min-h-screen bg-slate-50 flex flex-col justify-center items-center p-6 font-sans">
+  <div class="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-100">
+    <h1 class="text-2xl font-extrabold text-slate-900 mb-2">Registro de Colaborador</h1>
+    <p class="text-sm text-slate-500 mb-6">Sumate a dictar talleres y ayudar en los eventos.</p>
+    
+    <form class="flex flex-col gap-4">
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-1">Nombre Completo</label>
+        <input type="text" class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-slate-800 focus:border-indigo-500 focus:outline-none" placeholder="Tu nombre">
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-1">Correo Electrónico</label>
+        <input type="email" class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-slate-800 focus:border-indigo-500 focus:outline-none" placeholder="correo@ejemplo.com">
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-1">Área de Especialidad</label>
+        <select class="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-700 focus:border-indigo-500 focus:outline-none appearance-none">
+          <option value="" disabled selected>Elegí una opción...</option>
+          <option>Artes Visuales</option>
+          <option>Música</option>
+          <option>Artes Escénicas</option>
+          <option>Literatura</option>
+        </select>
+      </div>
+      <button type="button" class="w-full mt-4 bg-emerald-600 text-white font-semibold py-3 px-4 rounded-xl hover:bg-emerald-700">
+        Inscribirme como Colaborador
+      </button>
+    </form>
+    <div class="mt-6 text-center">
+      <a routerLink="/" class="text-indigo-600 font-semibold hover:underline text-sm">Volver al inicio</a>
+    </div>
+  </div>
+</div>
