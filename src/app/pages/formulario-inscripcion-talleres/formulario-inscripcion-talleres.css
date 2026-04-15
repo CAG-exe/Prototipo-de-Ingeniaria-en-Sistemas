@@ -1,0 +1,111 @@
+* {
+    margin  : 0;
+    padding : 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Raleway','Arial', sans-serif;
+    background: linear-gradient(135deg, #f4edf8, #610fad);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+label {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #333;
+    text-align: left;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: #fff;
+    padding: 45px;
+    border-radius: 8px;
+    box-shadow: 0 0 50px rgba(16, 0, 43, 2);
+    width: 650px;
+    border : 2px solid #10002b;
+    position: relative;
+}
+
+form h2 {
+    display: flex;
+    font-size: 30px;
+    color: #333;
+}
+section.section-title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+img.section-icon {
+    width: 150px;
+    height: 150px;
+    margin-right: 10px;
+}
+
+input {
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #E0AAFF;
+    color :#0a0a0a;
+    border: 1px solid #c77dff;
+    border-radius: 20px;
+    outline: none;
+}
+
+input::placeholder {
+    color: #0a0a0a;
+    opacity: 0.7;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.btn-inscription {
+    display: flex;
+    align-items: center;   
+    justify-content: center;   
+    height: 60px;
+    min-width: 175px;
+    background-color: #66f359;
+    gap: 10px;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-inscription:hover,
+.btn-inscription:active {
+    background-color: #0aff4b;
+    color: #0a0a0a;
+    font-size: 16.5px;
+    box-shadow: 0 0 10px rgba(0, 255, 75, 0.5);
+}
+
+.btn-inscription .icon {
+    width: 35px;
+    height: 35px; 
+}
+
+hr {
+    margin: 20px 10px;
+    border-top: 1px solid #240046;
+}
+
