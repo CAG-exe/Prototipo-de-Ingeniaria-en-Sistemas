@@ -1,30 +1,256 @@
-<body>
-  <form>
-    <div>
-      <section class="section-title">   <!-- imagen de referencia  -->
-        <img src="https://chubutahora.com/wp-content/uploads/2026/03/3037593-trelew-apertura-de-inscripciones-a-talleres-culturales.webp" alt="Talleres" class="section-icon">
-        <div>
-          <h2>Formulario de Inscripción a</h2>
-          <h2>"[Talleres]"</h2>
-        </div>
-      </section>
-      <p>Para poder inscribirte a este taller, por favor completa el siguiente formulario:</p>
+<div class="flex flex-col items-center justify-center p-4 min-h-screen bg-slate-50 font-sans">
+  <form class="p-8 bg-white shadow-lg shadow-indigo-950 w-full max-w-2xl gap-6 rounded-2xl">
+    <div class="flex flex-col gap-2 mb-4">
+      <h2 class="font-semibold text-2xl mb-4 text-center">Registrar nuevo taller</h2>
+      <p class="text-base text-slate-500 text-center">
+        Para poder inscribirte a este taller, por favor completa el siguiente formulario:
+      </p>
     </div>
-    <hr style ="margin-bottom: 20px;">
-    <label for="nombre">Nombre:</label>
-    <input type = "text" id="nombre" required>
-    <label for="apellido">Apellido:</label>
-    <input type = "text" id="apellido" required>
-    <label for="email">Correo Electrónico:</label>
-    <input type = "email" id="email" required>
-    <label for="telefono">Teléfono:</label>
-    <input type = "tel" id="telefono" required>
-    <div class="button-container">
-      <button class="btn-inscription" type="submit">Inscribirse <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon">
-      <path d="M4 12.6111L8.92308 17.5L20 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-      </svg>
-      </button>
+    <hr class ="my-4">
+    <div class="flex flex-col">
+    <label for="nombre" class="mt-3">Nombre del taller:</label>
+    <input type = "text" id="nombre" [(ngModel)]="nombreTaller" name="nombreTaller" class="border-b border-[#98c9a3] rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#38B000]" required>
+    <label for="email" class="mt-3">Correo Electrónico:</label>
+    <input type = "email" id="email" [(ngModel)]="correoElectronico" name="correoElectronico" class="border-b border-[#98c9a3] rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#38B000]" required>
+    <label for="telefono" class="mt-3">Teléfono:</label>
+    <input type = "tel" pattern="[0-9]*" id="telefono" [(ngModel)]="telefono" name="telefono" class="border-b border-[#98c9a3] rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#38B000]" required>
+    <label class="mt-3 text-lg font-semibold mb-2" >Redes sociales</label>
+    <select class="rounded-2xl p-1" [(ngModel)]="redSocial" (change)="haveRedSocial()" name="redSocial">
+      <option value="" disabled selected>Selecciona una red social</option>
+      <option value="ninguna">Ninguna</option>  <!---buscar forma de detecta cuando no se selecciona ninguna -->
+      <option value="facebook">Facebook</option>
+      <option value="twitter">Twitter</option>
+      <option value="instagram">Instagram</option>
+      <option value="linkedin">LinkedIn</option>
+    </select>
+    <input type="text" [placeholder]="tieneRedSocial ? 'Ingresar nick de la red social' : ''" [(ngModel)]="nickname" [disabled]="!tieneRedSocial" [required]="tieneRedSocial" name="nickname" class="border-b border-[#98c9a3] rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#38B000] mt-2 disabled:bg-gray-100 disabled:text-gray-400">
+
+    </div>
+
+    <hr class ="my-4">
+
+    <div class="flex flex-col">
+    <label class="mt-3 text-lg font-semibold mb-2">Dirección</label>
+    <div class="m-1">
+      <input type="checkbox" id="CentroCultural" [(ngModel)]="esCentroCultural" (change)="limpiarDireccion()"name="esCentroCultural" class="mr-2">
+      <label for="CentroCultural" class="mb-2">El taller se dictará en el Centro Cultural</label>
+    </div>
+
+    <label for="calle" class="mt-2">Calle</label>
+    <input type="text" id="calle" [(ngModel)]="calle" [disabled]="esCentroCultural" [required]="!esCentroCultural" name="calle" class="border-b border-[#98c9a3] rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#38B000] disabled:bg-gray-100 disabled:text-gray-400">
+
+    <label for="altura" class="mt-2">Altura</label>
+    <input type="number" id="altura" [(ngModel)]="altura" [disabled]="esCentroCultural" [required]="!esCentroCultural" name="altura" class="border-b border-[#98c9a3] rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#38B000] disabled:bg-gray-100 disabled:text-gray-400">
+
+    <label for="localidad" class="mt-2">Localidad</label>
+    <input type="text" id="localidad" [(ngModel)]="localidad" [disabled]="esCentroCultural" [required]="!esCentroCultural" name="localidad" class="border-b border-[#98c9a3] rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#38B000] disabled:bg-gray-100 disabled:text-gray-400">
+    </div>
+
+    <hr class ="my-4">
+
+    <label class =" font-semibold text-lg " >Horario</label>
+
+<div class="mb-3">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center min-w-[4rem]">
+              <input checked id="monday" name="days" type="checkbox" value="monday" class="w-4 h-4 border border-default-medium rounded-xs bg-neutral-secondary-medium focus:ring-2 focus:ring-brand-soft">
+              <label for="monday" class="ms-2 text-sm font-medium text-heading">Lunes</label>
+            </div>
+            <div class="w-full max-w-[7rem]">
+              <label for="start-time-monday" class="sr-only">Sart time:</label>
+              <div class="relative">
+                  <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+                        <svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                  </div>
+                  <input type="time" id="start-time-monday" class="block w-full p-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body" min="09:00" max="18:00" value="00:00" required />
+              </div>
+            </div>
+            <div class="w-full max-w-[7rem]">
+              <label for="end-time-monday" class="sr-only">End time:</label>
+              <div class="relative">
+                  <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+                        <svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                  </div>
+                  <input type="time" id="end-time-monday" class="block w-full p-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body" min="09:00" max="18:00" value="00:00" required />
+              </div>
+            </div>
+            <div>
+              <button type="button" class="inline-flex items-center p-1.5 text-sm font-medium text-center rounded-base focus:outline-none text-body hover:bg-neutral-tertiary hover:text-heading">
+<svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+</svg>
+
+                  <span class="sr-only">Delete</span>
+              </button>
+            </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center min-w-[4rem]">
+              <input id="tuesday" name="days" type="checkbox" value="tuesday" class="w-4 h-4 border border-default-medium rounded-xs bg-neutral-secondary-medium focus:ring-2 focus:ring-brand-soft">
+              <label for="tuesday" class="ms-2 text-sm font-medium text-heading">Martes</label>
+            </div>
+            <div class="w-full max-w-[7rem]">
+              <label for="start-time-tuesday" class="sr-only">Start time:</label>
+              <div class="relative">
+                  <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+<svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                  </div>
+                  <input type="time" id="start-time-tuesday" name="start-time-tuesday" class="block w-full p-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body" min="09:00" max="18:00" value="00:00" required />
+              </div>
+            </div>
+            <div class="w-full max-w-[7rem]">
+              <label for="end-time-tuesday" class="sr-only">End time:</label>
+              <div class="relative">
+                  <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+<svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                  </div>
+                  <input type="time" id="end-time-tuesday" name="end-time-tuesday" class="block w-full p-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body" min="09:00" max="18:00" value="00:00" required />
+              </div>
+            </div>
+            <div>
+              <button type="button" class="inline-flex items-center p-1.5 text-sm font-medium text-center rounded-base focus:outline-none text-body hover:bg-neutral-tertiary hover:text-heading">
+<svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+</svg>
+
+                  <span class="sr-only">Delete</span>
+              </button>
+            </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center min-w-[3rem]">
+              <input checked id="wednesday" name="days" type="checkbox" value="wednesday" class="w-4 h-4 border border-default-medium rounded-xs bg-neutral-secondary-medium focus:ring-2 focus:ring-brand-soft">
+              <label for="wednesday" class="ms-2 text-sm font-medium text-heading">Miércoles</label>
+            </div>
+            <div class="w-full max-w-[7rem]">
+              <label for="start-time-wednesday" class="sr-only">Start time:</label>
+              <div class="relative">
+                  <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+<svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                  </div>
+                  <input type="time" id="start-time-wednesday" name="start-time-wednesday" class="block w-full p-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body" min="09:00" max="18:00" value="00:00" required />
+              </div>
+            </div>
+            <div class="w-full max-w-[7rem]">
+              <label for="end-time-wednesday" class="sr-only">End time:</label>
+              <div class="relative">
+                  <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+<svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                  </div>
+                  <input type="time" id="end-time-wednesday" name="end-time-wednesday" class="block w-full p-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body" min="09:00" max="18:00" value="00:00" required />
+              </div>
+            </div>
+            <div>
+              <button type="button" class="inline-flex items-center p-1.5 text-sm font-medium text-center rounded-base focus:outline-none text-body hover:bg-neutral-tertiary hover:text-heading">
+<svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+</svg>
+
+                  <span class="sr-only">Delete</span>
+              </button>
+            </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center min-w-[4rem]">
+              <input id="thursday" name="days" type="checkbox" value="thursday" class="w-4 h-4 border border-default-medium rounded-xs bg-neutral-secondary-medium focus:ring-2 focus:ring-brand-soft">
+              <label for="thursday" class="ms-2 text-sm font-medium text-heading">Jueves</label>
+            </div>
+            <div class="w-full max-w-[7rem]">
+              <label for="start-time-thursday" class="sr-only">Start time:</label>
+              <div class="relative">
+                  <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+<svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                  </div>
+                  <input type="time" id="start-time-thursday" name="start-time-thursday" class="block w-full p-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body" min="09:00" max="18:00" value="00:00" required />
+                </div>
+            </div>
+            <div class="w-full max-w-[7rem]">
+              <label for="end-time-thursday" class="sr-only">End time:</label>
+              <div class="relative">
+                  <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+<svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                  </div>
+                  <input type="time" id="end-time-thursday" name="end-time-thursday" class="block w-full p-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body" min="09:00" max="18:00" value="00:00" required />
+              </div>
+            </div>
+            <div>
+              <button type="button" class="inline-flex items-center p-1.5 text-sm font-medium text-center rounded-base focus:outline-none text-body hover:bg-neutral-tertiary hover:text-heading">
+<svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+</svg>
+
+                  <span class="sr-only">Delete</span>
+              </button>
+            </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center min-w-[4rem]">
+              <input id="friday" name="days" type="checkbox" value="friday" class="w-4 h-4 border border-default-medium rounded-xs bg-neutral-secondary-medium focus:ring-2 focus:ring-brand-soft">
+              <label for="friday" class="ms-2 text-sm font-medium text-heading">Viernes</label>
+            </div>
+            <div class="w-full max-w-[7rem]">
+              <label for="start-time-friday" class="sr-only">Start time:</label>
+              <div class="relative">
+                  <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+<svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                  </div>
+                  <input type="time" id="start-time-friday" name="start-time-friday" class="block w-full p-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body" min="09:00" max="18:00" value="00:00" required />
+              </div>
+            </div>
+            <div class="w-full max-w-[7rem]">
+              <label for="end-time-friday" class="sr-only">End time:</label>
+              <div class="relative">
+                  <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+<svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+                  </div>
+                  <input type="time" id="end-time-friday" name="end-time-friday" class="block w-full p-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body" min="09:00" max="18:00" value="00:00" required />
+              </div>
+            </div>
+            <div>
+              <button type="button" class="inline-flex items-center p-1.5 text-sm font-medium text-center rounded-base focus:outline-none text-body hover:bg-neutral-tertiary hover:text-heading">
+<svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+</svg>
+
+                  <span class="sr-only">Delete</span>
+              </button>
+            </div>
+        </div>
+      </div>
+
+    <hr>
+
+    <div class="flex flex-col">
+    <label class ="mt-3 font-semibold text-lg " >Descripción</label>
+    <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion" class="border-b border-[#98c9a3] rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#006400]" required></textarea>
+      <p>{{descripcion}}</p>
+    </div>
+
+    <hr>
+    <div class="flex flex-col">
+    <h2 class="mt-3 font-semibold text-lg">Imagen del taller</h2>
+    <div class="p-3 flex justify-start">
+      <label for="imagen" class="rounded-lg w-36 h-10 bg--400 text-black flex items-center justify-center gap-2  bg-[#70E000] border-[#008000] hover:bg-emerald-500 active:bg-emerald-600 transition duration-200">
+        Ingresar imagen</label>
+    </div>
+      <input type="file" id="imagen" accept="image/*" class="invisible">
+    </div>
+
+    <div class="p-3 mt-6 flex justify-end">
+      <button class="rounded-lg w-36 h-8 bg--400 text-black flex items-center justify-center gap-2  bg-[#70E000] hover:bg-emerald-500 active:bg-emerald-600 transition duration-200">
+        Registrar
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4">
+          <path d="M4 12.6111L8.92308 17.5L20 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        </button>
     </div>
   </form>
-</body>
-
+</div>
