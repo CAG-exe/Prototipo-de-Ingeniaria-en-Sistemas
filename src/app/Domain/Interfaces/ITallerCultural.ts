@@ -18,11 +18,6 @@ export interface IDireccionNormalizada {
   tipo: string;
 }
 
-export interface ISocialMedia {
-  redSocial: string;
-  nickname: string;
-}
-
 export interface ITallerCultural {
   id: number;
   nombre: string;
@@ -31,7 +26,7 @@ export interface ITallerCultural {
   telefono: string;
   email: string;
   atencion: string;
-  redesSociales: ISocialMedia[];
+  redesSociales: string;
   descripcion: string;
   habilitado: boolean;
   direccionesNormalizadas: IDireccionNormalizada[];

@@ -1,19 +1,21 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ITallerCultural } from '../../Domain/Interfaces/ITallerCultural';
-import { HttpClient } from '@angular/common/http';
 import { data } from '../../Data/workshops';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
+import { TallerService } from '../../Domain/Services/TallerServices';
+import { NgIf } from '@angular/common';
+import { SafePipe } from '../../Shared/Pipes/safe.pipe';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-formulario-inscripcion-talleres',
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink, NgIf, SafePipe],
   templateUrl: './formulario-inscripcion-talleres.html',
   styleUrl: './formulario-inscripcion-talleres.css',
 })
 export class FormularioInscripcionTalleres {
-  private http = inject(HttpClient);
-
+  imagenBase64: string = '';
   imagen: string = '';
   rubro: string = '';
   esCentroCultural: boolean = false;
@@ -33,64 +35,19 @@ export class FormularioInscripcionTalleres {
   archivoParaSubir: File | null = null;
   imagenPreview: string | null = null;
 
-  limpiarDireccion() {
-    if (this.esCentroCultural) {
-      this.calle = '';
-      this.altura = '';
-      this.localidad = '';
-    }
-  }
+  constructor(
+    private tallerService: TallerService,
+    private router: Router,
+    private cdr: ChangeDetectorRef,
+  ) {}
 
-  haveRedSocial() {
-    this.tieneRedSocial = this.redSocial !== '' && this.redSocial !== 'ninguna';
-    if (!this.tieneRedSocial) {
-      this.nickname = '';
-    }
-  }
-
-  capturarImagen(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      this.archivoParaSubir = file;
-      this.imagen = `images/talleres/${file.name}`;
-
-      // Generar vista previa
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.imagenPreview = reader.result as string;
-      };
-      reader.readAsDataURL(file);
-      console.log('Imagen lista para subir:', this.imagen);
-    }
-  }
-
-  registrarTaller() {
-    if (this.archivoParaSubir) {
-      const formData = new FormData();
-      formData.append('image', this.archivoParaSubir);
-
-      this.http.post('http://localhost:3000/upload', formData).subscribe({
-        next: (res: any) => {
-          console.log('Imagen guardada:', res.path);
-          this.guardarDatosEnArchivo();
-        },
-        error: (err) => {
-          console.error('Error al subir la imagen:', err);
-          alert('Error: El servidor de persistencia no está respondiendo.');
-        },
-      });
-    } else {
-      this.guardarDatosEnArchivo();
-    }
-  }
-
-  private guardarDatosEnArchivo() {
+  saveWorkshop() {
     const proximoId = data.length > 0 ? Math.max(...data.map((t) => t.id)) + 1 : 1;
 
     const nuevoTaller: ITallerCultural = {
       id: proximoId,
       nombre: this.nombreTaller,
-      imagen: this.imagen || 'https://images.unsplash.com/photo-1511192336575-5a79af67a629',
+      imagen: this.imagenBase64 || '',
       rubro: this.rubro,
       telefono: this.telefono,
       email: this.correoElectronico,
@@ -98,15 +55,7 @@ export class FormularioInscripcionTalleres {
 
       descripcion: this.descripcion || '',
       habilitado: true,
-      redesSociales: this.tieneRedSocial
-        ? [
-            {
-              redSocial: this.redSocial,
-              nickname: this.nickname,
-            },
-          ]
-        : [],
-
+      redesSociales: this.tieneRedSocial ? this.redSocial + '/' + this.nickname : '',
       direccionesNormalizadas: [
         {
           altura: Number(this.altura),
@@ -123,5 +72,41 @@ export class FormularioInscripcionTalleres {
         },
       ],
     };
+
+    this.tallerService.addWorkshop(nuevoTaller);
+    this.router.navigate(['/talleres']);
+  }
+
+  clearDirection() {
+    if (this.esCentroCultural) {
+      this.calle = '';
+      this.altura = '';
+      this.localidad = '';
+    }
+  }
+
+  haveRedSocial() {
+    this.tieneRedSocial = this.redSocial !== '' && this.redSocial !== 'ninguna';
+    if (!this.tieneRedSocial) {
+      this.nickname = '';
+    }
+  }
+
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      this.imagenBase64 = reader.result as string;
+      this.cdr.detectChanges();
+    };
+
+    reader.readAsDataURL(file);
+  }
+
+  removeImage(): void {
+    this.imagenBase64 = '';
   }
 }

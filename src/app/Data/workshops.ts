@@ -12,10 +12,7 @@ export const data: ITallerCultural[] = [
     descripcion:
       'Espacio dedicado a preservar danzas folklóricas argentinas para todas las edades.',
     habilitado: true,
-    redesSociales: [
-      { redSocial: 'Instagram', nickname: '@raicesdelnorte' },
-      { redSocial: 'Facebook', nickname: 'Raices del Norte Taller' },
-    ],
+    redesSociales: 'Instagram/raicesdelnorte',
     direccionesNormalizadas: [
       {
         altura: 2100,
@@ -43,7 +40,7 @@ export const data: ITallerCultural[] = [
     atencion: 'Martes y Jueves de 17:00hs a 19:00hs',
     descripcion: 'Taller de muralismo, graffiti y arte callejero para jóvenes.',
     habilitado: true,
-    redesSociales: [{ redSocial: 'Instagram', nickname: '@arteurbano_nogues' }],
+    redesSociales: 'Instagram/arteurbano_nogues',
     direccionesNormalizadas: [
       {
         altura: 950,
@@ -71,7 +68,7 @@ export const data: ITallerCultural[] = [
     atencion: 'Miércoles de 19:00hs a 21:00hs',
     descripcion: 'Clases iniciales y avanzadas de guitarra, piano y teoría musical.',
     habilitado: true,
-    redesSociales: [{ redSocial: 'Instagram', nickname: '@casamusica.gb' }],
+    redesSociales: 'Instagram/casamusica.gb',
     direccionesNormalizadas: [
       {
         altura: 1340,
@@ -99,7 +96,7 @@ export const data: ITallerCultural[] = [
     atencion: 'Jueves de 18:00hs a 20:30hs',
     descripcion: 'Entrenamiento actoral, improvisación y puesta en escena.',
     habilitado: true,
-    redesSociales: [{ redSocial: 'Facebook', nickname: 'Laboratorio Teatral Zona Norte' }],
+    redesSociales: 'Facebook/Laboratorio Teatral Zona Norte',
     direccionesNormalizadas: [
       {
         altura: 420,
@@ -127,7 +124,7 @@ export const data: ITallerCultural[] = [
     atencion: 'Viernes de 16:30hs a 19:00hs',
     descripcion: 'Modelado y esmaltado de piezas en cerámica artesanal.',
     habilitado: true,
-    redesSociales: [{ redSocial: 'Instagram', nickname: '@tierra.viva.ceramica' }],
+    redesSociales: 'Instagram/tierra.viva.ceramica',
     direccionesNormalizadas: [
       {
         altura: 780,
@@ -155,7 +152,7 @@ export const data: ITallerCultural[] = [
     atencion: 'Sábados de 10:00hs a 13:00hs',
     descripcion: 'Fotografía digital, iluminación y edición.',
     habilitado: true,
-    redesSociales: [{ redSocial: 'Instagram', nickname: '@flashnorte' }],
+    redesSociales: 'Instagram/flashnorte',
     direccionesNormalizadas: [
       {
         altura: 1220,
@@ -183,7 +180,7 @@ export const data: ITallerCultural[] = [
     atencion: 'Lunes y Miércoles de 20:00hs a 21:30hs',
     descripcion: 'Expresión corporal y danza contemporánea.',
     habilitado: true,
-    redesSociales: [{ redSocial: 'Instagram', nickname: '@danzalibre' }],
+    redesSociales: 'Instagram/danzalibre',
     direccionesNormalizadas: [
       {
         altura: 540,
@@ -211,7 +208,7 @@ export const data: ITallerCultural[] = [
     atencion: 'Miércoles de 19:30hs a 21:00hs',
     descripcion: 'Encuentros de lectura y debate literario.',
     habilitado: true,
-    redesSociales: [{ redSocial: 'Facebook', nickname: 'Club El Andén' }],
+    redesSociales: 'Facebook/Club El Andén',
     direccionesNormalizadas: [
       {
         altura: 310,
@@ -239,7 +236,7 @@ export const data: ITallerCultural[] = [
     atencion: 'Jueves de 17:30hs a 19:30hs',
     descripcion: 'Escultura en madera, yeso y materiales reciclados.',
     habilitado: true,
-    redesSociales: [{ redSocial: 'Instagram', nickname: '@escultura.norte' }],
+    redesSociales: 'Instagram/escultura.norte',
     direccionesNormalizadas: [
       {
         altura: 1670,
@@ -267,7 +264,7 @@ export const data: ITallerCultural[] = [
     atencion: 'Viernes de 18:00hs a 20:30hs',
     descripcion: 'Clases de pintura acrílica y óleo para principiantes.',
     habilitado: true,
-    redesSociales: [{ redSocial: 'Instagram', nickname: '@puertasabiertas.cc' }],
+    redesSociales: 'Instagram/puertasabiertas.cc',
     direccionesNormalizadas: [
       {
         altura: 600,

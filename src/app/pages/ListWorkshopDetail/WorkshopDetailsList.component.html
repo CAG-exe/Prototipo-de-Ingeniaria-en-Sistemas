@@ -1,8 +1,8 @@
 <div class="space-y-6">
-  <ng-container *ngIf="details() as list; else emptyState">
+  <ng-container *ngIf="workshops as list; else emptyState">
 
     <app-workshop-detail
-      *ngFor="let detail of list; trackBy: trackByNombre"
+      *ngFor="let detail of list"
       [detail]="detail"></app-workshop-detail>
 
   </ng-container>

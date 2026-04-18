@@ -29,7 +29,7 @@
 
     <div class="w-full sm:w-36 md:w-40 shrink-0 sm:order-2 order-1">
       <div class="aspect-[16/9] sm:aspect-square w-full rounded-lg overflow-hidden border border-slate-100 bg-slate-50 shadow-sm">
-        <img *ngIf="detail()?.imagen" [src]="detail()?.imagen" [alt]="'Imagen de ' + detail()?.nombre"
+        <img *ngIf="detail()?.imagen" [src]="detail()?.imagen | safe:'url'" [alt]="'Imagen de ' + detail()?.nombre"
           class="w-full h-full object-cover hover:scale-105 transition-transform duration-300 ease-out" />
         
         <div *ngIf="!detail()?.imagen" class="w-full h-full flex items-center justify-center text-slate-300">

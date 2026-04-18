@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { ITallerCultural } from '../../Domain/Interfaces/ITallerCultural';
-import { data } from '../../Data/workshops';
 import { WorkshopDetailComponent } from '../WorkshopDetail/WorkshopDetail.component';
+import { TallerService } from '../../Domain/Services/TallerServices';
 
 @Component({
   standalone: true,
@@ -11,9 +11,13 @@ import { WorkshopDetailComponent } from '../WorkshopDetail/WorkshopDetail.compon
   imports: [CommonModule, WorkshopDetailComponent],
 })
 export class WorkshopDetailsListComponent {
-  readonly details = signal<ITallerCultural[]>(data);
+  workshops: ITallerCultural[] = [];
 
-  trackByNombre(index: number, item: ITallerCultural) {
-    return item.nombre;
+  constructor(private workshopService: TallerService) {}
+
+  ngOnInit() {
+    this.workshopService.workshops$.subscribe((workshop) => {
+      this.workshops = workshop;
+    });
   }
 }
