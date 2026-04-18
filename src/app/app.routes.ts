@@ -5,6 +5,7 @@ import { CollaboratorRegistration } from './pages/collaborator-registration/coll
 import { FormularioInscripcionTalleres } from './pages/formulario-inscripcion-talleres/formulario-inscripcion-talleres';
 import { WorkshopDetailComponent } from './pages/WorkshopDetail/WorkshopDetail.component';
 import { WorkshopDetailsListComponent } from './pages/ListWorkshopDetail/WorkshopDetailsList.component';
+import { SearchResults } from './pages/search-results/search-results';
 
 export const routes: Routes = [
   { path: '', component: MainScreen },
@@ -13,5 +14,6 @@ export const routes: Routes = [
   { path: 'formulario-inscripcion-talleres', component: FormularioInscripcionTalleres },
   { path: 'taller/:id', component: WorkshopDetailComponent },
   { path: 'talleres', component: WorkshopDetailsListComponent },
+  { path: 'search-results', component: SearchResults },
   { path: '**', redirectTo: '' }
 ];

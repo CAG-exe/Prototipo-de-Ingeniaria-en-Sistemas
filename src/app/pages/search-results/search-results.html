@@ -1,0 +1,53 @@
+<div style="display: flex; height: 100vh;">
+  <aside #listEl style="width: 400px; overflow-y: auto; border-right: 1px solid #e2e8f0; padding: 16px;">
+    <h1 class="text-xl font-bold mb-2">Talleres</h1>
+    <h2 class="text-sm font-semibold text-slate-600 mb-2">Resultados: {{ selectedPlaces().length }}</h2>
+    @if (selectedPlaces().length === 0) {
+      <p class="text-sm text-slate-500 mb-4">Sin resultados</p>
+    } @else {
+      @for (place of selectedPlaces(); track place.nombre) {
+        <button
+          type="button"
+          [attr.data-place]="place.nombre"
+          (click)="onPlaceClick(place)"
+          [class.ring-2]="place === highlightedPlace()"
+          [class.ring-red-500]="place === highlightedPlace()"
+          class="w-full text-left p-3 border border-slate-200 rounded-lg mb-2 bg-white hover:bg-slate-50 cursor-pointer"
+        >
+          <h3 class="font-semibold">{{ place.nombre }}</h3>
+          <p class="text-sm text-slate-500">{{ place.direccion }}</p>
+        </button>
+      }
+    }
+    <hr class="my-4 border-slate-200" />
+    <h2 class="text-sm font-semibold text-slate-600 mb-2">Otros talleres en la zona</h2>
+    @if (otherPlaces().length === 0) {
+      <p class="text-sm text-slate-500">Ninguno en el área visible</p>
+    } @else {
+      @for (place of otherPlaces(); track place.nombre) {
+        <button
+          type="button"
+          [attr.data-place]="place.nombre"
+          (click)="onPlaceClick(place)"
+          [class.ring-2]="place === highlightedPlace()"
+          [class.ring-red-500]="place === highlightedPlace()"
+          class="w-full text-left p-3 border border-slate-200 rounded-lg mb-2 bg-white hover:bg-slate-50 cursor-pointer"
+        >
+          <h3 class="font-semibold">{{ place.nombre }}</h3>
+          <p class="text-sm text-slate-500">{{ place.direccion }}</p>
+        </button>
+      }
+    }
+  </aside>
+  <section style="flex: 1; height: 100%;">
+    @if (allPlaces().length > 0) {
+      <app-map
+        [places]="allPlaces()"
+        [selectedPlaces]="selectedPlaces()"
+        [highlightedPlace]="highlightedPlace()"
+        (placesInViewport)="onPlacesInViewport($event)"
+        (placeClicked)="onPlaceClick($event)"
+      />
+    }
+  </section>
+</div>
