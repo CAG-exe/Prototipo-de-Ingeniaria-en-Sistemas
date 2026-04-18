@@ -18,13 +18,21 @@ export interface IDireccionNormalizada {
   tipo: string;
 }
 
+export interface ISocialMedia {
+  redSocial: string;
+  nickname: string;
+}
+
 export interface ITallerCultural {
   id: number;
   nombre: string;
   imagen: string;
   rubro: string;
   telefono: string;
-  contacto: string;
+  email: string;
   atencion: string;
+  redesSociales: ISocialMedia[];
+  descripcion: string;
+  habilitado: boolean;
   direccionesNormalizadas: IDireccionNormalizada[];
 }
