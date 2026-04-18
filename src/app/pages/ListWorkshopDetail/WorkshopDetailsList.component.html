@@ -1,0 +1,15 @@
+<div class="space-y-6">
+  <ng-container *ngIf="details() as list; else emptyState">
+
+    <app-workshop-detail
+      *ngFor="let detail of list; trackBy: trackByNombre"
+      [detail]="detail"></app-workshop-detail>
+
+  </ng-container>
+
+  <ng-template #emptyState>
+    <p class="rounded-3xl border border-slate-200 bg-slate-50 p-6 text-slate-600">
+      No hay detalles disponibles para mostrar.
+    </p>
+  </ng-template>
+</div>
