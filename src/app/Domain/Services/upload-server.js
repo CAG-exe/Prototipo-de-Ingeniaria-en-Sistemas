@@ -12,7 +12,7 @@ app.use(express.json());
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const dir = './src/assets/images/talleres';
+    const dir = './public/images/talleres';
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
     }
@@ -31,16 +31,15 @@ app.post('/upload', upload.single('image'), (req, res) => {
   }
   res.send({
     message: 'Archivo subido con éxito',
-    path: `assets/images/talleres/${req.file.filename}`,
+    path: `/images/talleres/${req.file.filename}`,
   });
 });
 
 app.post('/save-workshop', (req, res) => {
-  // Ajustamos el path para llegar a Data/workshops.ts desde Domain/Services
   const filePath = path.join(__dirname, '../../../app/Data/workshops.ts');
-  const newWorkshop = req.body;
-
+  
   try {
+    const newWorkshop = req.body;
     let content = fs.readFileSync(filePath, 'utf8');
     const lastIndex = content.lastIndexOf('];');
 
@@ -48,14 +47,17 @@ app.post('/save-workshop', (req, res) => {
       return res.status(500).send('No se pudo encontrar el final del array en workshops.ts');
     }
 
-    // Convert to TypeScript-style object literal (no quotes on keys)
-    let workshopString = JSON.stringify(newWorkshop, null, 2);
-    workshopString = workshopString.replace(/"(\w+)":/g, '$1:');
+    // Ensure image path is correct (relative to public)
+    if (newWorkshop.imagen && !newWorkshop.imagen.startsWith('http') && !newWorkshop.imagen.startsWith('/')) {
+        newWorkshop.imagen = '/' + newWorkshop.imagen;
+    }
 
-    // Logic to properly insert with commas
-    let trimmedContent = content.slice(0, lastIndex).trimEnd();
+    // Format object as clean TypeScript (no quotes on keys, trailing commas)
+    let workshopString = JSON.stringify(newWorkshop, null, 2);
+    workshopString = workshopString.replace(/"(\w+)":/g, '$1:'); // Remove quotes from keys
+    workshopString = workshopString.replace(/"/g, "'"); // Use single quotes for values
     
-    // If the array already has objects, we need a comma
+    let trimmedContent = content.slice(0, lastIndex).trimEnd();
     const needsComma = trimmedContent.endsWith('}') || trimmedContent.endsWith(']');
     const prefix = needsComma ? ',\n  ' : '\n  ';
 

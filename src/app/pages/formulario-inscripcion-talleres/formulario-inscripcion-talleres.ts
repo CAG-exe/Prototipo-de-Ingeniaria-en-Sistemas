@@ -30,6 +30,7 @@ export class FormularioInscripcionTalleres {
 
     horariosTexto: string = '';
     archivoParaSubir: File | null = null;
+    imagenPreview: string | null = null;
 
     limpiarDireccion() {
         if (this.esCentroCultural) {
@@ -50,7 +51,14 @@ export class FormularioInscripcionTalleres {
         const file = event.target.files[0];
         if (file) {
             this.archivoParaSubir = file;
-            this.imagen = `assets/images/talleres/${file.name}`;
+            this.imagen = `images/talleres/${file.name}`;
+            
+            // Generar vista previa
+            const reader = new FileReader();
+            reader.onload = () => {
+                this.imagenPreview = reader.result as string;
+            };
+            reader.readAsDataURL(file);
             console.log('Imagen lista para subir:', this.imagen);
         }
     }
