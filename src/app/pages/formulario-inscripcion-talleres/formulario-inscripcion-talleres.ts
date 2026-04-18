@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ITallerCultural } from '../../Domain/Interfaces/IWorkshopDetail';
+import { ITallerCultural } from '../../Domain/Interfaces/ITallerCultural';
 import { HttpClient } from '@angular/common/http';
 import { data } from '../../Data/workshops';
 import { RouterLink } from '@angular/router';
@@ -85,7 +85,6 @@ export class FormularioInscripcionTalleres {
   }
 
   private guardarDatosEnArchivo() {
-
     const proximoId = data.length > 0 ? Math.max(...data.map((t) => t.id)) + 1 : 1;
 
     const nuevoTaller: ITallerCultural = {
@@ -96,7 +95,6 @@ export class FormularioInscripcionTalleres {
       telefono: this.telefono,
       email: this.correoElectronico,
       atencion: this.horariosTexto,
-
 
       descripcion: this.descripcion || '',
       habilitado: true,
@@ -125,17 +123,5 @@ export class FormularioInscripcionTalleres {
         },
       ],
     };
-
-    this.http.post('http://localhost:3000/save-workshop', nuevoTaller).subscribe({
-      next: () => {
-        console.log('Taller guardado permanentemente en workshops.ts');
-        alert('Taller registrado y guardado permanentemente.');
-        // Aquí podrías redirigir a la lista de talleres
-      },
-      error: (err) => {
-        console.error('Error al persistir datos:', err);
-        alert('La imagen se subió pero no se pudo guardar el texto en workshops.ts');
-      },
-    });
   }
 }

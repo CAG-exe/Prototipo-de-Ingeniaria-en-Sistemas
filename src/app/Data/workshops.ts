@@ -1,4 +1,4 @@
-﻿import { ITallerCultural } from '../Domain/Interfaces/IWorkshopDetail';
+﻿import { ITallerCultural } from '../Domain/Interfaces/ITallerCultural';
 
 export const data: ITallerCultural[] = [
   {
@@ -9,7 +9,8 @@ export const data: ITallerCultural[] = [
     telefono: '1132458891',
     email: 'raicesnorte@gmail.com',
     atencion: 'Lunes a Viernes de 18:30hs a 20:00hs',
-    descripcion: 'Espacio dedicado a preservar danzas folklóricas argentinas para todas las edades.',
+    descripcion:
+      'Espacio dedicado a preservar danzas folklóricas argentinas para todas las edades.',
     habilitado: true,
     redesSociales: [
       { redSocial: 'Instagram', nickname: '@raicesdelnorte' },
@@ -42,9 +43,7 @@ export const data: ITallerCultural[] = [
     atencion: 'Martes y Jueves de 17:00hs a 19:00hs',
     descripcion: 'Taller de muralismo, graffiti y arte callejero para jóvenes.',
     habilitado: true,
-    redesSociales: [
-      { redSocial: 'Instagram', nickname: '@arteurbano_nogues' }
-    ],
+    redesSociales: [{ redSocial: 'Instagram', nickname: '@arteurbano_nogues' }],
     direccionesNormalizadas: [
       {
         altura: 950,
@@ -72,9 +71,7 @@ export const data: ITallerCultural[] = [
     atencion: 'Miércoles de 19:00hs a 21:00hs',
     descripcion: 'Clases iniciales y avanzadas de guitarra, piano y teoría musical.',
     habilitado: true,
-    redesSociales: [
-      { redSocial: 'Instagram', nickname: '@casamusica.gb' }
-    ],
+    redesSociales: [{ redSocial: 'Instagram', nickname: '@casamusica.gb' }],
     direccionesNormalizadas: [
       {
         altura: 1340,
@@ -102,9 +99,7 @@ export const data: ITallerCultural[] = [
     atencion: 'Jueves de 18:00hs a 20:30hs',
     descripcion: 'Entrenamiento actoral, improvisación y puesta en escena.',
     habilitado: true,
-    redesSociales: [
-      { redSocial: 'Facebook', nickname: 'Laboratorio Teatral Zona Norte' }
-    ],
+    redesSociales: [{ redSocial: 'Facebook', nickname: 'Laboratorio Teatral Zona Norte' }],
     direccionesNormalizadas: [
       {
         altura: 420,
@@ -288,41 +283,5 @@ export const data: ITallerCultural[] = [
         tipo: 'calle_altura',
       },
     ],
-  },
-  {
-  id: 11,
-  nombre: 'taller de pruebas',
-  imagen: '/images/talleres/017.jpg',
-  rubro: 'musica',
-  telefono: '01131397348',
-  email: 'admin@admin.com',
-  atencion: 'Martes y Jueves de 15:00HS a 17:00HS',
-  descripcion: 'jgbuguy',
-  habilitado: true,
-  redesSociales: [
-    {
-      redSocial: 'facebook',
-      nickname: 'dede'
-    }
-  ],
-  direccionesNormalizadas: [
-    {
-      altura: 665,
-      cod_calle: 0,
-      cod_calle_cruce: null,
-      cod_partido: '',
-      coordenadas: {
-        srid: 4326,
-        x: 0,
-        y: 0
-      },
-      direccion: 'calle 665, Localidad123',
-      nombre_calle: 'calle',
-      nombre_calle_cruce: '',
-      nombre_localidad: 'Localidad123',
-      nombre_partido: '',
-      tipo: 'calle_altura'
-    }
-  ]
-}
+  }
 ];

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, signal } from '@angular/core';
-import { ITallerCultural } from '../../Domain/Interfaces/IWorkshopDetail';
+import { ITallerCultural } from '../../Domain/Interfaces/ITallerCultural';
 import { data } from '../../Data/workshops';
 import { WorkshopDetailComponent } from '../WorkshopDetail/WorkshopDetail.component';
 
@@ -13,7 +13,7 @@ import { WorkshopDetailComponent } from '../WorkshopDetail/WorkshopDetail.compon
 export class WorkshopDetailsListComponent {
   readonly details = signal<ITallerCultural[]>(data);
 
-    trackByNombre(index: number, item: ITallerCultural) {
+  trackByNombre(index: number, item: ITallerCultural) {
     return item.nombre;
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ITallerCultural } from '../../Domain/Interfaces/IWorkshopDetail';
+import { ITallerCultural } from '../../Domain/Interfaces/ITallerCultural';
 
 @Component({
   standalone: true,
@@ -12,9 +12,7 @@ import { ITallerCultural } from '../../Domain/Interfaces/IWorkshopDetail';
 export class WorkshopDetailComponent implements OnInit {
   readonly detail = input<ITallerCultural>();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
