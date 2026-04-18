@@ -165,17 +165,33 @@
           Ingresar imagen</label
         >
       </div>
-      <input type="file" id="imagen" accept="image/*" class="invisible" (change)="capturarImagen($event)" />
+      <input
+        type="file"
+        id="imagen"
+        accept="image/*"
+        class="invisible"
+        (change)="capturarImagen($event)"
+      />
       @if (imagenPreview) {
         <div class="mt-2 px-3">
           <p class="text-[13px] text-slate-500 mb-2">Vista previa:</p>
-          <img [src]="imagenPreview" class="w-32 h-32 object-cover rounded-lg border border-slate-200 shadow-sm" alt="Preview" />
+          <img
+            [src]="imagenPreview"
+            class="w-32 h-32 object-cover rounded-lg border border-slate-200 shadow-sm"
+            alt="Preview"
+          />
           <p class="text-[11px] text-slate-400 mt-1">{{ imagen }}</p>
         </div>
       }
     </div>
 
-    <div class="p-3 mt-6 flex justify-end">
+    <div class="p-3 mt-6 flex justify-end gap-2">
+      <button
+        class="rounded-lg w-36 h-8 bg--400 text-black flex items-center justify-center gap-2 bg-[#70E000] hover:bg-emerald-500 active:bg-emerald-600 transition duration-200"
+      >
+        <a routerLink="/">Volver al inicio</a>
+      </button>
+
       <button
         class="rounded-lg w-36 h-8 bg--400 text-black flex items-center justify-center gap-2 bg-[#70E000] hover:bg-emerald-500 active:bg-emerald-600 transition duration-200"
       >

@@ -3,10 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { ITallerCultural } from '../../Domain/Interfaces/IWorkshopDetail';
 import { HttpClient } from '@angular/common/http';
 import { data } from '../../Data/workshops';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-formulario-inscripcion-talleres',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './formulario-inscripcion-talleres.html',
   styleUrl: './formulario-inscripcion-talleres.css',
 })
