@@ -1,19 +1,25 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ITallerCultural } from '../../Domain/Interfaces/IWorkshopDetail';
+import { HttpClient } from '@angular/common/http';
+import { data } from '../../Data/workshops';
 
 @Component({
   selector: 'app-formulario-inscripcion-talleres',
-  imports: [RouterLink, FormsModule],
+  imports: [FormsModule],
   templateUrl: './formulario-inscripcion-talleres.html',
   styleUrl: './formulario-inscripcion-talleres.css',
 })
 export class FormularioInscripcionTalleres {
+    private http = inject(HttpClient);
+
+    imagen: string = '';
+    rubro: string = '';
     esCentroCultural: boolean = false;
     tieneRedSocial: boolean = false;
     
     calle : string = '';
-    altura : number | null = null
+    altura : string = '';
     localidad : string = '';
     nombreTaller: string = '';
     correoElectronico: string = '';
@@ -22,19 +28,13 @@ export class FormularioInscripcionTalleres {
     nickname: string = '';
     descripcion: string = '';
 
-
-    lunes: boolean = false;
-    martes: boolean = false
-    miercoles: boolean = false;
-    jueves: boolean = false
-    viernes: boolean = false;
-
-    //Sarmiento 118 , san martin , direccion previs para el centro cultural 
+    horariosTexto: string = '';
+    archivoParaSubir: File | null = null;
 
     limpiarDireccion() {
         if (this.esCentroCultural) {
             this.calle = '';
-            this.altura = null;
+            this.altura = '';
             this.localidad = '';
         }
     }
@@ -46,26 +46,74 @@ export class FormularioInscripcionTalleres {
       }
     }
 
-    activadoLunes() {
-      this.lunes = !this.lunes;
-    }
-    
-    activadoMartes() {
-      this.martes = !this.martes;
-    }
-    
-    activadoMiercoles() {
-      this.miercoles = !this.miercoles;
-    }
-    
-    activadoJueves() {
-      this.jueves = !this.jueves;
-    }
-    
-    activadoViernes() {
-      this.viernes = !this.viernes;
+    capturarImagen(event: any) {
+        const file = event.target.files[0];
+        if (file) {
+            this.archivoParaSubir = file;
+            this.imagen = `assets/images/talleres/${file.name}`;
+            console.log('Imagen lista para subir:', this.imagen);
+        }
     }
 
+    registrarTaller() {
+        if (this.archivoParaSubir) {
+            const formData = new FormData();
+            formData.append('image', this.archivoParaSubir);
+
+            this.http.post('http://localhost:3000/upload', formData).subscribe({
+                next: (res: any) => {
+                    console.log('Imagen guardada:', res.path);
+                    this.guardarDatosEnArchivo();
+                },
+                error: (err) => {
+                    console.error('Error al subir la imagen:', err);
+                    alert('Error: El servidor de persistencia no está respondiendo.');
+                }
+            });
+        } else {
+            this.guardarDatosEnArchivo();
+        }
+    }
+
+    private guardarDatosEnArchivo() {
+        // Calculamos el ID siguiente
+        const proximoId = data.length > 0 ? Math.max(...data.map(t => t.id)) + 1 : 1;
+
+        const nuevoTaller: ITallerCultural = {
+            id: proximoId,
+            nombre: this.nombreTaller,
+            imagen: this.imagen || 'https://images.unsplash.com/photo-1511192336575-5a79af67a629', // Fallback
+            rubro: this.rubro,
+            telefono: this.telefono,
+            contacto: this.correoElectronico,
+            atencion: this.horariosTexto,
+            direccionesNormalizadas: [
+                {
+                    altura: Number(this.altura),
+                    cod_calle: 0,
+                    cod_partido: '',
+                    coordenadas: { srid: 4326, x: 0, y: 0 },
+                    direccion: this.calle + ' ' + this.altura + ', ' + this.localidad,
+                    nombre_calle: this.calle,
+                    nombre_localidad: this.localidad,
+                    nombre_partido: '',
+                    tipo: 'calle_altura',
+                },
+            ]
+        };
+
+        this.http.post('http://localhost:3000/save-workshop', nuevoTaller).subscribe({
+            next: () => {
+                console.log('Taller guardado permanentemente en workshops.ts');
+                alert('Taller registrado y guardado permanentemente.');
+                // Aquí podrías redirigir a la lista de talleres
+            },
+            error: (err) => {
+                console.error('Error al persistir datos:', err);
+                alert('La imagen se subió pero no se pudo guardar el texto en workshops.ts');
+            }
+        });
+    }
 
 }
 

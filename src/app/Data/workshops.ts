@@ -1,11 +1,13 @@
-﻿export const data = [
+import { ITallerCultural } from '../Domain/Interfaces/IWorkshopDetail';
+
+export const data: ITallerCultural[] = [
   {
     id: 1,
     nombre: 'Taller Cultural Raíces del Norte',
     imagen: 'https://images.unsplash.com/photo-1511192336575-5a79af67a629',
     rubro: 'Folklore y danzas',
     telefono: '1132458891',
-    contacto: { email: 'raicesnorte@gmail.com' },
+    contacto: 'raicesnorte@gmail.com',
     atencion: 'Lunes a Viernes de 18:30hs a 20:00hs',
     direccionesNormalizadas: [
       {
@@ -27,7 +29,7 @@
     imagen: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee',
     rubro: 'Muralismo y graffiti',
     telefono: '1165538890',
-    contacto: { email: 'arteurbano@gmail.com' },
+    contacto: 'arteurbano@gmail.com',
     atencion: 'Martes y Jueves de 17:00hs a 19:00hs',
     direccionesNormalizadas: [
       {
@@ -49,7 +51,7 @@
     imagen: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d',
     rubro: 'Clases de guitarra y piano',
     telefono: '1178890021',
-    contacto: { email: 'casamusica@gmail.com' },
+    contacto: 'casamusica@gmail.com',
     atencion: 'Miércoles de 19:00hs a 21:00hs',
     direccionesNormalizadas: [
       {
@@ -71,7 +73,7 @@
     imagen: 'https://images.unsplash.com/photo-1503095396549-807759245b35',
     rubro: 'Teatro',
     telefono: '1133448899',
-    contacto: { email: 'labteatral@gmail.com' },
+    contacto: 'labteatral@gmail.com',
     atencion: 'Jueves de 18:00hs a 20:30hs',
     direccionesNormalizadas: [
       {
@@ -93,7 +95,7 @@
     imagen: 'https://images.unsplash.com/photo-1517685352821-92cf88aee5a5',
     rubro: 'Cerámica',
     telefono: '1142217788',
-    contacto: { email: 'tierraviva@gmail.com' },
+    contacto: 'tierraviva@gmail.com',
     atencion: 'Viernes de 16:30hs a 19:00hs',
     direccionesNormalizadas: [
       {
@@ -115,7 +117,7 @@
     imagen: 'https://images.unsplash.com/photo-1492724441997-5dc865305da7',
     rubro: 'Fotografía',
     telefono: '1160023344',
-    contacto: { email: 'flashnorte@gmail.com' },
+    contacto: 'flashnorte@gmail.com',
     atencion: 'Sábados de 10:00hs a 13:00hs',
     direccionesNormalizadas: [
       {
@@ -137,7 +139,7 @@
     imagen: 'https://images.unsplash.com/photo-1504609813442-a8924e83f76e',
     rubro: 'Danza contemporánea',
     telefono: '1188877766',
-    contacto: { email: 'danzalibre@gmail.com' },
+    contacto: 'danzalibre@gmail.com',
     atencion: 'Lunes y Miércoles de 20:00hs a 21:30hs',
     direccionesNormalizadas: [
       {
@@ -159,7 +161,7 @@
     imagen: 'https://images.unsplash.com/photo-1519681393784-d120267933ba',
     rubro: 'Literatura',
     telefono: '1154432211',
-    contacto: { email: 'elanden@gmail.com' },
+    contacto: 'elanden@gmail.com',
     atencion: 'Miércoles de 19:30hs a 21:00hs',
     direccionesNormalizadas: [
       {
@@ -181,7 +183,7 @@
     imagen: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f',
     rubro: 'Escultura',
     telefono: '1130098877',
-    contacto: { email: 'esculturanorte@gmail.com' },
+    contacto: 'esculturanorte@gmail.com',
     atencion: 'Jueves de 17:30hs a 19:30hs',
     direccionesNormalizadas: [
       {
@@ -203,7 +205,7 @@
     imagen: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97',
     rubro: 'Pintura',
     telefono: '1199987766',
-    contacto: { email: 'puertasabiertas@gmail.com' },
+    contacto: 'puertasabiertas@gmail.com',
     atencion: 'Viernes de 18:00hs a 20:30hs',
     direccionesNormalizadas: [
       {
