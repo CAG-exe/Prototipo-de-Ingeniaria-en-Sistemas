@@ -2,6 +2,7 @@ import { Component, OnInit, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ITallerCultural } from '../../Domain/Interfaces/ITallerCultural';
 import { SafePipe } from '../../Shared/Pipes/safe.pipe';
+import { TallerService } from '../../Domain/Services/TallerServices';
 
 @Component({
   standalone: true,
@@ -13,7 +14,14 @@ import { SafePipe } from '../../Shared/Pipes/safe.pipe';
 export class WorkshopDetailComponent implements OnInit {
   readonly detail = input<ITallerCultural>();
 
-  constructor() {}
+  constructor(private workshopService: TallerService) {}
 
   ngOnInit() {}
+
+  toggleStatus() {
+    const workshop = this.detail();
+    if (workshop) {
+      this.workshopService.toggleWorkshopStatus(workshop.id);
+    }
+  }
 }

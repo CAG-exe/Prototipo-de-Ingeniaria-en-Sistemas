@@ -54,7 +54,7 @@ export class FormularioInscripcionTalleres {
       atencion: this.horariosTexto,
 
       descripcion: this.descripcion || '',
-      habilitado: true,
+      habilitado: false,
       redesSociales: this.tieneRedSocial ? this.redSocial + '/' + this.nickname : '',
       direccionesNormalizadas: [
         {
@@ -74,7 +74,7 @@ export class FormularioInscripcionTalleres {
     };
 
     this.tallerService.addWorkshop(nuevoTaller);
-    this.router.navigate(['/talleres']);
+    this.router.navigate(['/*']);
   }
 
   clearDirection() {

@@ -6,17 +6,17 @@
     <form class="flex flex-col gap-4">
       <div>
         <label class="block text-sm font-semibold text-slate-700 mb-1">Nombre Completo</label>
-        <input type="text" class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-slate-800 focus:border-indigo-500 focus:outline-none" placeholder="Tu nombre">
+        <input type="text" [(ngModel)]="name" name="name" class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-slate-800 focus:border-indigo-500 focus:outline-none" placeholder="Tu nombre">
       </div>
       <div>
         <label class="block text-sm font-semibold text-slate-700 mb-1">Correo Institucional</label>
-        <input type="email" class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-slate-800 focus:border-indigo-500 focus:outline-none" placeholder="admin@cultura.com">
+        <input type="email" [(ngModel)]="email" name="email" class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-slate-800 focus:border-indigo-500 focus:outline-none" placeholder="admin@cultura.com">
       </div>
       <div>
         <label class="block text-sm font-semibold text-slate-700 mb-1">Código de Autorización</label>
-        <input type="password" class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-slate-800 focus:border-indigo-500 focus:outline-none" placeholder="Ingresá el código">
+        <input type="password" [(ngModel)]="password" name="password" class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-slate-800 focus:border-indigo-500 focus:outline-none" placeholder="Ingresá el código">
       </div>
-      <button type="button" class="w-full mt-4 bg-slate-800 text-white font-semibold py-3 px-4 rounded-xl hover:bg-slate-900">
+      <button type="button" (click)="login()" class="w-full mt-4 bg-slate-800 text-white font-semibold py-3 px-4 rounded-xl hover:bg-slate-900">
         Completar Registro
       </button>
     </form>

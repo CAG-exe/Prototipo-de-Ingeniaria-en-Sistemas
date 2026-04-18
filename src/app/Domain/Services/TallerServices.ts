@@ -27,4 +27,12 @@ export class TallerService {
     const actuales = this.workshopsSubject.value;
     this.workshopsSubject.next([...actuales, workshop]);
   }
+
+  toggleWorkshopStatus(id: number) {
+    const actuales = this.workshopsSubject.value;
+    const actualizados = actuales.map(w => 
+      w.id === id ? { ...w, habilitado: !w.habilitado } : w
+    );
+    this.workshopsSubject.next(actualizados);
+  }
 }

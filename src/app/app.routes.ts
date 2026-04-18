@@ -7,9 +7,9 @@ import { WorkshopDetailsListComponent } from './pages/ListWorkshopDetail/Worksho
 
 export const routes: Routes = [
   { path: '', component: MainScreen },
-  { path: 'registro-moderador', component: ModeratorRegistration },
-  { path: 'registro-colaborador', component: FormularioInscripcionTalleres },
-  { path: 'taller/:id', component: WorkshopDetailComponent },
-  { path: 'talleres', component: WorkshopDetailsListComponent },
+  { path: 'login-moderator', component: ModeratorRegistration },
+  { path: 'form-inscription-workshops', component: FormularioInscripcionTalleres },
+  // { path: 'workshop/:id', component: WorkshopDetailComponent },
+  { path: 'workshops-manager', component: WorkshopDetailsListComponent },
   { path: '**', redirectTo: '' }
 ];

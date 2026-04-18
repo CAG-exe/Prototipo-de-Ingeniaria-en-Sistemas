@@ -39,7 +39,7 @@ export const data: ITallerCultural[] = [
     email: 'arteurbano@gmail.com',
     atencion: 'Martes y Jueves de 17:00hs a 19:00hs',
     descripcion: 'Taller de muralismo, graffiti y arte callejero para jóvenes.',
-    habilitado: true,
+    habilitado: false,
     redesSociales: 'Instagram/arteurbano_nogues',
     direccionesNormalizadas: [
       {
@@ -67,7 +67,7 @@ export const data: ITallerCultural[] = [
     email: 'casamusica@gmail.com',
     atencion: 'Miércoles de 19:00hs a 21:00hs',
     descripcion: 'Clases iniciales y avanzadas de guitarra, piano y teoría musical.',
-    habilitado: true,
+    habilitado: false,
     redesSociales: 'Instagram/casamusica.gb',
     direccionesNormalizadas: [
       {
@@ -151,7 +151,7 @@ export const data: ITallerCultural[] = [
     email: 'flashnorte@gmail.com',
     atencion: 'Sábados de 10:00hs a 13:00hs',
     descripcion: 'Fotografía digital, iluminación y edición.',
-    habilitado: true,
+    habilitado: false,
     redesSociales: 'Instagram/flashnorte',
     direccionesNormalizadas: [
       {
@@ -235,7 +235,7 @@ export const data: ITallerCultural[] = [
     email: 'esculturanorte@gmail.com',
     atencion: 'Jueves de 17:30hs a 19:30hs',
     descripcion: 'Escultura en madera, yeso y materiales reciclados.',
-    habilitado: true,
+    habilitado: false,
     redesSociales: 'Instagram/escultura.norte',
     direccionesNormalizadas: [
       {
