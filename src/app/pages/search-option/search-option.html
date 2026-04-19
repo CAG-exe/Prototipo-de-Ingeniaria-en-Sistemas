@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Búsqueda de Talleres</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <link rel="stylesheet" href="search-option.css" />
 </head>
 <body>
@@ -20,13 +21,30 @@
           placeholder="Buscar talleres"
           autocomplete="off"
         />
-        <button class="search-btn" id="searchBtn" aria-label="Buscar">         
+        <button class="search-btn" id="searchBtn" aria-label="Buscar">   
+          <span class="material-icons" style="font-size: 20px;">search</span>      
         </button>
       </div>
+
+      <button id="btnAdvanced" class="btn-advanced">Filtros avanzados ▼</button>
+      <div id="panelAdvanced" class="panel-advanced hidden">
+        <div class="advanced-field">
+          <label for="inputDireccion">Zona:</label>
+          <input type="text" id="inputDireccion" class="search-input advanced-input" />
+        </div>
+        <div class="advanced-field">
+          <label for="inputHorario">Días y horarios disponibles:</label>
+          <input type="text" id="inputHorario" class="search-input advanced-input" />
+        </div>
+      </div>
     </header>
-    <main class="results-section">
+  <main class="results-section">
       <div class="results-list" id="resultsList"></div>
-    </main>
+      
+      <div class="empty-state hidden" id="emptyState">
+        <p></p>
+      </div>
+  </main>
  
   </div>
  
@@ -82,8 +100,108 @@
         rubro: "aire acondicionado",
         fotoUrl:"https://tecnomaxequip.com.ar/wp-content/uploads/2018/05/aire-acondicionado-autos-g.png"
       },
+      {
+        id: 6,
+        nombre: "Fuchibol",
+        horario: "Mar–Jue 13:00–15:00",
+        direccion: "Vicente López 2710, San Miguel",
+        telefono: "+54 11 3312-4354",
+        redes: "Instagram: @futbolParaTodos",
+        rubro: "educación física",
+        fotoUrl:"https://static.vecteezy.com/system/resources/thumbnails/027/829/024/small/close-up-of-many-soccer-players-kicking-a-football-on-a-field-competition-scene-created-with-generative-ai-technology-photo.jpg"
+      },
+      {
+        id: 6,
+        nombre: "Danza Urbana",
+        horario: "Lun–Mie 11:00–23:00",
+        direccion: "Aristóbulo del Valle 2421, Moreno",
+        telefono: "+54 11 4732-6600",
+        redes: "Facebook: @danza_urbana_moreno_masterclass",
+        rubro: "cultura",
+        fotoUrl:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx5lgO1teyzojJuM6iGYcDJ2N_XwfHk6m0KQ&s"
+      }
     ];
+    let textoBusqueda = "";
+    let textoDireccion = "";
+    let textoHorario = "";
 
+function comprobarHorarioDinamico(horarioTaller, textoUsuario) {
+      if (textoUsuario === "") return true;
+
+      const hLower = horarioTaller.toLowerCase();
+      
+      // 1. Traducir el texto del taller a días específicos
+      let diasDisponibles = "";
+      if (hLower.includes("lun–vie") || hLower.includes("lun-vie")) {
+        diasDisponibles = "lunes martes miercoles miércoles jueves viernes";
+      } else if (hLower.includes("lun–sáb") || hLower.includes("lun-sab")) {
+        diasDisponibles = "lunes martes miercoles miércoles jueves viernes sabado sábado";
+      } else if (hLower.includes("todos los días") || hLower.includes("todos los dias")) {
+        diasDisponibles = "lunes martes miercoles miércoles jueves viernes sabado sábado domingo";
+      } else if (hLower.includes("mar–jue") || hLower.includes("mar-jue")) {
+        diasDisponibles = "martes miercoles miércoles jueves";
+      } else if (hLower.includes("lun–mie") || hLower.includes("lun-mie")) {
+        diasDisponibles = "lunes martes miercoles miércoles";
+      }
+
+      // 2. Extraer el rango de horas del taller (Busca números con formato de hora)
+      let horaApertura = 0;
+      let horaCierre = 0;
+      const matchHoras = hLower.match(/(\d{1,2}):\d{2}.*?(\d{1,2}):\d{2}/);
+      if (matchHoras) {
+        horaApertura = parseInt(matchHoras[1]);
+        horaCierre = parseInt(matchHoras[2]);
+      }
+
+      // 3. Analizar qué intentó buscar el usuario
+      const diasSemana = ["lunes", "martes", "miercoles", "miércoles", "jueves", "viernes", "sabado", "sábado", "domingo"];
+      const diaBuscado = diasSemana.find(d => textoUsuario.includes(d));
+
+      let horaBuscada = null;
+      const matchNumero = textoUsuario.match(/\b([0-2]?[0-9])\b/); // Busca un número suelto en el texto
+      if (matchNumero) {
+        horaBuscada = parseInt(matchNumero[1]);
+      }
+
+      // Si el usuario no escribió ni un día claro ni una hora, hacemos una búsqueda de texto normal
+      if (!diaBuscado && horaBuscada === null) {
+        return hLower.includes(textoUsuario);
+      }
+
+      // 4. Validar si el taller cumple
+      let cumpleDia = true;
+      if (diaBuscado) {
+        cumpleDia = diasDisponibles.includes(diaBuscado);
+      }
+
+      let cumpleHora = true;
+      if (horaBuscada !== null && horaApertura > 0 && horaCierre > 0) {
+        // Se asegura de que la hora que busca el usuario esté entre la apertura y el cierre
+        cumpleHora = horaBuscada >= horaApertura && horaBuscada <= horaCierre;
+      }
+
+      return cumpleDia && cumpleHora;
+    }
+
+    function filtrarTalleres() {
+      const texto = textoBusqueda.toLowerCase().trim();
+      const dir = textoDireccion.toLowerCase().trim();
+      const hor = textoHorario.toLowerCase().trim();
+      return talleres.filter((t) => {
+        // Coincidencia general
+        const matchGeneral =
+          texto === "" ||
+          t.nombre.toLowerCase().includes(texto) ||
+          t.rubro.toLowerCase().includes(texto);
+          
+        // Coincidencias específicas
+        const matchDir = dir === "" || t.direccion.toLowerCase().includes(dir);
+        const matchHor = comprobarHorarioDinamico(t.horario, hor);
+
+        // Retorna verdadero solo si cumple TODOS los criterios ingresados
+        return matchGeneral && matchDir && matchHor;
+      });
+    }
  
 function renderCard(taller, index) {
       const fotoContent = taller.fotoUrl
@@ -121,19 +239,70 @@ function renderCard(taller, index) {
     }
  
 function renderResultados() {
-      const resultados = talleres; 
+      const resultados = filtrarTalleres(); 
       const lista      = document.getElementById("resultsList");
+      const emptyState = document.getElementById("emptyState");
  
       if (resultados.length === 0) {
         lista.innerHTML = "";
+        emptyState.classList.remove("hidden");
       } else {
-        const plural = resultados.length !== 1;
+        emptyState.classList.add("hidden");
         lista.innerHTML = resultados.map((t, i) => renderCard(t, i)).join("");
         bindCardEvents();
       }
     }
+    function bindCardEvents() {
+      document.querySelectorAll(".taller-card").forEach((card) => {
+        card.addEventListener("click", () => onCardClick(Number(card.dataset.id)));
+        card.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onCardClick(Number(card.dataset.id));
+          }
+        });
+      });
+    }
+ 
+    function onCardClick(id) {
+      const taller = talleres.find((t) => t.id === id);
+      if (taller) {
+        console.log("Taller seleccionado:", taller);
+      }
+    }
+
+
  
 document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("searchInput");
+  const searchBtn   = document.getElementById("searchBtn");
+  const btnAdvanced = document.getElementById("btnAdvanced");
+  const panelAdvanced = document.getElementById("panelAdvanced");
+  const inputDireccion = document.getElementById("inputDireccion");
+  const inputHorario = document.getElementById("inputHorario");
+
+      // Buscar a medida que escribes
+      searchInput.addEventListener("input", () => {
+        textoBusqueda = searchInput.value;
+        renderResultados();
+      });
+      btnAdvanced.addEventListener("click", () => {
+        panelAdvanced.classList.toggle("hidden");
+        btnAdvanced.textContent = panelAdvanced.classList.contains("hidden") 
+          ? "Filtros avanzados ▼" 
+          : "Ocultar filtros ▲";
+      });
+
+      // Eventos para campos avanzados
+        inputDireccion.addEventListener("input", () => {
+        textoDireccion = inputDireccion.value;
+        renderResultados();
+      });
+
+        inputHorario.addEventListener("input", () => {
+        textoHorario = inputHorario.value;
+        renderResultados();
+      });
       renderResultados();
     });
   </script>
