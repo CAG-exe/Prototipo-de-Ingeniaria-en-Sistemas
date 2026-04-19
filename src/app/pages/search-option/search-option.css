@@ -257,3 +257,6 @@ body {
     flex: 1;
   }
 }
+.hidden {
+  display: none !important;
+}

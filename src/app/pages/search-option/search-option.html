@@ -29,6 +29,18 @@
       <button id="btnAdvanced" class="btn-advanced">Filtros avanzados ▼</button>
       <div id="panelAdvanced" class="panel-advanced hidden">
         <div class="advanced-field">
+          <label for="selectRubro">Rubro:</label>
+          <select id="selectRubro" class="search-input advanced-input">
+            <option value="">Todos los rubros</option>
+            <option value="mecánica">Mecánica</option>
+            <option value="electricidad">Electricidad</option>
+            <option value="chapa y pintura">Chapa y Pintura</option>
+            <option value="gomería">Gomería</option>
+            <option value="aire acondicionado">Aire Acondicionado</option>
+            <option value="educación física">Educación Física</option>
+          </select>
+        </div>
+        <div class="advanced-field">
           <label for="inputDireccion">Zona:</label>
           <input type="text" id="inputDireccion" class="search-input advanced-input" />
         </div>
@@ -124,6 +136,7 @@
     let textoBusqueda = "";
     let textoDireccion = "";
     let textoHorario = "";
+    let filtroRubro = "";
 
 function comprobarHorarioDinamico(horarioTaller, textoUsuario) {
       if (textoUsuario === "") return true;
@@ -192,14 +205,16 @@ function comprobarHorarioDinamico(horarioTaller, textoUsuario) {
         const matchGeneral =
           texto === "" ||
           t.nombre.toLowerCase().includes(texto) ||
+          t.rubro.toLowerCase().includes(texto) ||
           t.rubro.toLowerCase().includes(texto);
           
         // Coincidencias específicas
         const matchDir = dir === "" || t.direccion.toLowerCase().includes(dir);
         const matchHor = comprobarHorarioDinamico(t.horario, hor);
+        const matchRubro = filtroRubro === "" || t.rubro === filtroRubro;
 
         // Retorna verdadero solo si cumple TODOS los criterios ingresados
-        return matchGeneral && matchDir && matchHor;
+        return matchGeneral && matchDir && matchHor && matchRubro;
       });
     }
  
@@ -280,6 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const panelAdvanced = document.getElementById("panelAdvanced");
   const inputDireccion = document.getElementById("inputDireccion");
   const inputHorario = document.getElementById("inputHorario");
+  const selectRubro = document.getElementById("selectRubro");
 
       // Buscar a medida que escribes
       searchInput.addEventListener("input", () => {
@@ -301,6 +317,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         inputHorario.addEventListener("input", () => {
         textoHorario = inputHorario.value;
+        renderResultados();
+      });
+      selectRubro.addEventListener("input", () => {
+        filtroRubro = selectRubro.value;
         renderResultados();
       });
       renderResultados();
