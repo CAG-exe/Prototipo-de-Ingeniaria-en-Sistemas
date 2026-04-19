@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ITallerCultural } from '../Interfaces/ITallerCultural';
-import { data } from '../../Data/workshops';
-
+import { WORKSHOP_MOCK } from '../../Data/workshops';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TallerService {
-
-  private workshopsSubject = new BehaviorSubject<ITallerCultural[]>(data);
+  private workshopsSubject = new BehaviorSubject<ITallerCultural[]>(WORKSHOP_MOCK);
   workshops$ = this.workshopsSubject.asObservable();
 
   constructor() {}
@@ -30,8 +28,8 @@ export class TallerService {
 
   toggleWorkshopStatus(id: number) {
     const actuales = this.workshopsSubject.value;
-    const actualizados = actuales.map(w => 
-      w.id === id ? { ...w, habilitado: !w.habilitado } : w
+    const actualizados = actuales.map((w) =>
+      w.id === id ? { ...w, habilitado: !w.habilitado } : w,
     );
     this.workshopsSubject.next(actualizados);
   }

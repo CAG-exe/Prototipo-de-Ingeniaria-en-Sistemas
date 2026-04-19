@@ -1,6 +1,6 @@
 ﻿import { ITallerCultural } from '../Domain/Interfaces/ITallerCultural';
 
-export const data: ITallerCultural[] = [
+export const WORKSHOP_MOCK: ITallerCultural[] = [
   {
     id: 1,
     nombre: 'Taller Cultural Raíces del Norte',
@@ -280,5 +280,5 @@ export const data: ITallerCultural[] = [
         tipo: 'calle_altura',
       },
     ],
-  }
+  },
 ];

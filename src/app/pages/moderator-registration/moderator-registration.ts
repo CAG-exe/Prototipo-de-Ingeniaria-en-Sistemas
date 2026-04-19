@@ -24,7 +24,7 @@ export class ModeratorRegistration {
     if (this.name === this.nameModerator && 
         this.email === this.emailModerator && 
         this.password === this.passwordModerator) {
-      this.router.navigate(['/workshops-manager']);
+      this.router.navigate(['/users-manager']);
     } else {
       alert('Credenciales incorrectas');
     }

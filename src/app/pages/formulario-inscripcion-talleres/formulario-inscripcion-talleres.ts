@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ITallerCultural } from '../../Domain/Interfaces/ITallerCultural';
-import { data } from '../../Data/workshops';
+import { WORKSHOP_MOCK } from '../../Data/workshops';
 import { RouterLink, Router } from '@angular/router';
 import { TallerService } from '../../Domain/Services/TallerServices';
 import { NgIf } from '@angular/common';
@@ -42,7 +42,8 @@ export class FormularioInscripcionTalleres {
   ) {}
 
   saveWorkshop() {
-    const proximoId = data.length > 0 ? Math.max(...data.map((t) => t.id)) + 1 : 1;
+    const proximoId =
+      WORKSHOP_MOCK.length > 0 ? Math.max(...WORKSHOP_MOCK.map((t) => t.id)) + 1 : 1;
 
     const nuevoTaller: ITallerCultural = {
       id: proximoId,
