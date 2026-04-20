@@ -4,9 +4,10 @@ import { ModeratorRegistration } from './pages/moderator-registration/moderator-
 import { FormularioInscripcionTalleres } from './pages/formulario-inscripcion-talleres/formulario-inscripcion-talleres';
 import { WorkshopDetailComponent } from './pages/WorkshopDetail/WorkshopDetail.component';
 import { WorkshopDetailsListComponent } from './pages/ListWorkshopDetail/WorkshopDetailsList.component';
+import { SearchResults } from './pages/search-results/search-results';
+import { CollaboratorLogin } from './pages/collaborator-login/collaborator-login';
 import { CollaboratorRegistrationComponent } from './pages/collaborator-registration/collaborator-registration.component';
 import { UserManagementComponent } from './pages/UserManagement/UserManagement.component';
-import { CollaboratorLogin } from './pages/collaborator-login/collaborator-login';
 
 export const routes: Routes = [
   { path: '', component: MainScreen },
@@ -17,5 +18,6 @@ export const routes: Routes = [
   // { path: 'workshop/:id', component: WorkshopDetailComponent },
   { path: 'workshops-manager', component: WorkshopDetailsListComponent },
   { path: 'users-manager', component: UserManagementComponent },
+  { path: 'search-results', component: SearchResults },
   { path: '**', redirectTo: '' }
 ];
