@@ -1,15 +1,31 @@
-<div class="space-y-6">
-  <ng-container *ngIf="details() as list; else emptyState">
+<div class="max-w-6xl mx-auto p-6 space-y-6">
+  <div class="flex items-center justify-between mb-8">
+    <h2 class="text-3xl font-extrabold text-slate-900">Gestor de Talleres</h2>
+    <a 
+      routerLink="/"
+      class="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 text-slate-600 rounded-xl font-semibold hover:bg-slate-50 transition shadow-sm"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+      </svg>
+      Volver al menú
+    </a>
+  </div>
 
-    <app-workshop-detail
-      *ngFor="let detail of list; trackBy: trackByNombre"
-      [detail]="detail"></app-workshop-detail>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 auto-rows-fr">
+    <ng-container *ngIf="workshops && workshops.length > 0; else emptyState">
 
-  </ng-container>
+      <app-workshop-detail
+        *ngFor="let detail of workshops; trackBy: trackById"
+        [detail]="detail">
+      </app-workshop-detail>
 
-  <ng-template #emptyState>
-    <p class="rounded-3xl border border-slate-200 bg-slate-50 p-6 text-slate-600">
-      No hay detalles disponibles para mostrar.
-    </p>
-  </ng-template>
+    </ng-container>
+
+    <ng-template #emptyState>
+      <p class="rounded-3xl border border-slate-200 bg-slate-50 p-6 text-slate-600 text-center">
+        No hay talleres disponibles para mostrar.
+      </p>
+    </ng-template>
+  </div>
 </div>

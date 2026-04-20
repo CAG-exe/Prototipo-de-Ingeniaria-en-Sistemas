@@ -1,23 +1,23 @@
 <div class="min-h-screen bg-slate-50 flex flex-col justify-center items-center p-6 font-sans">
   <div class="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-100">
-    <h1 class="text-2xl font-extrabold text-slate-900 mb-2">Registro de Moderador</h1>
+    <h1 class="text-2xl font-extrabold text-slate-900 mb-2">Inicio de sesión de Moderador</h1>
     <p class="text-sm text-slate-500 mb-6">Administrá los talleres y coordina los espacios.</p>
     
     <form class="flex flex-col gap-4">
       <div>
         <label class="block text-sm font-semibold text-slate-700 mb-1">Nombre Completo</label>
-        <input type="text" class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-slate-800 focus:border-indigo-500 focus:outline-none" placeholder="Tu nombre">
+        <input type="text" [(ngModel)]="name" name="name" class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-slate-800 focus:border-indigo-500 focus:outline-none" placeholder="Tu nombre">
       </div>
       <div>
         <label class="block text-sm font-semibold text-slate-700 mb-1">Correo Institucional</label>
-        <input type="email" class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-slate-800 focus:border-indigo-500 focus:outline-none" placeholder="admin@cultura.com">
+        <input type="email" [(ngModel)]="email" name="email" class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-slate-800 focus:border-indigo-500 focus:outline-none" placeholder="admin@cultura.com">
       </div>
       <div>
         <label class="block text-sm font-semibold text-slate-700 mb-1">Código de Autorización</label>
-        <input type="password" class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-slate-800 focus:border-indigo-500 focus:outline-none" placeholder="Ingresá el código">
+        <input type="password" [(ngModel)]="password" name="password" class="w-full border border-slate-300 rounded-xl px-4 py-2.5 text-slate-800 focus:border-indigo-500 focus:outline-none" placeholder="Ingresá el código">
       </div>
-      <button type="button" class="w-full mt-4 bg-slate-800 text-white font-semibold py-3 px-4 rounded-xl hover:bg-slate-900">
-        Completar Registro
+      <button type="button" (click)="login()" class="w-full mt-4 bg-slate-800 text-white font-semibold py-3 px-4 rounded-xl hover:bg-slate-900">
+        Iniciar sesión
       </button>
     </form>
     <div class="mt-6 text-center">

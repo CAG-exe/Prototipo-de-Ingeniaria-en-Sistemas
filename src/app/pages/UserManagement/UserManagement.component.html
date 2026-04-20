@@ -1,0 +1,37 @@
+<div class="max-w-6xl mx-auto p-6 space-y-6">
+  <div class="flex items-center justify-between mb-8">
+    <h2 class="text-3xl font-extrabold text-slate-900">Gestor de Usuarios</h2>
+    <a 
+      routerLink="/"
+      class="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 text-slate-600 rounded-xl font-semibold hover:bg-slate-50 transition shadow-sm"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+      </svg>
+      Volver al menú
+    </a>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 auto-rows-fr">
+    <ng-container *ngIf="users && users.length > 0; else emptyState">
+
+      <app-user-item
+        *ngFor="let user of users; trackBy: trackById"
+        [user]="user">
+      </app-user-item>
+
+    </ng-container>
+
+    <ng-template #emptyState>
+      <div class="col-span-full py-12 text-center bg-slate-50 border border-dashed border-slate-300 rounded-3xl">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-slate-100 text-slate-400 mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+          </svg>
+        </div>
+        <p class="text-slate-600 font-medium">No hay usuarios registrados.</p>
+        <p class="text-slate-400 text-sm mt-1">Cuando se registren usuarios, aparecerán en esta lista.</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

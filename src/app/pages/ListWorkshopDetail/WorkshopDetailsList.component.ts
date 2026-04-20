@@ -1,19 +1,29 @@
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component, input, signal } from '@angular/core';
-import { ITallerCultural } from '../../Domain/Interfaces/IWorkshopDetail';
-import { data } from '../../Data/workshops';
+import { RouterLink } from '@angular/router';
+import { ITallerCultural } from '../../Domain/Interfaces/ITallerCultural';
 import { WorkshopDetailComponent } from '../WorkshopDetail/WorkshopDetail.component';
+import { TallerService } from '../../Domain/Services/TallerServices';
 
 @Component({
   standalone: true,
   selector: 'app-workshop-details-list',
   templateUrl: './WorkshopDetailsList.component.html',
-  imports: [CommonModule, WorkshopDetailComponent],
+  imports: [CommonModule, WorkshopDetailComponent, RouterLink],
 })
 export class WorkshopDetailsListComponent {
-  readonly details = signal<ITallerCultural[]>(data);
+  workshops: ITallerCultural[] = [];
 
-    trackByNombre(index: number, item: ITallerCultural) {
-    return item.nombre;
+  constructor(private workshopService: TallerService) {}
+
+  ngOnInit() {
+    this.workshopService.workshops$.subscribe((workshop) => {
+      this.workshops = workshop;
+    });
   }
+
+  trackById(index: number, item: ITallerCultural) {
+  return item.id;
+}
+
 }

@@ -1,72 +1,113 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ITallerCultural } from '../../Domain/Interfaces/ITallerCultural';
+import { WORKSHOP_MOCK } from '../../Data/workshops';
+import { RouterLink, Router } from '@angular/router';
+import { TallerService } from '../../Domain/Services/TallerServices';
+import { NgIf } from '@angular/common';
+import { SafePipe } from '../../Shared/Pipes/safe.pipe';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-formulario-inscripcion-talleres',
-  imports: [RouterLink, FormsModule],
+  imports: [FormsModule, RouterLink, NgIf, SafePipe],
   templateUrl: './formulario-inscripcion-talleres.html',
   styleUrl: './formulario-inscripcion-talleres.css',
 })
 export class FormularioInscripcionTalleres {
-    esCentroCultural: boolean = false;
-    tieneRedSocial: boolean = false;
-    
-    calle : string = '';
-    altura : number | null = null
-    localidad : string = '';
-    nombreTaller: string = '';
-    correoElectronico: string = '';
-    telefono: string = '';
-    redSocial: string = '';
-    nickname: string = '';
-    descripcion: string = '';
+  imagenBase64: string = '';
+  imagen: string = '';
+  rubro: string = '';
+  esCentroCultural: boolean = false;
+  tieneRedSocial: boolean = false;
 
+  calle: string = '';
+  altura: string = '';
+  localidad: string = '';
+  nombreTaller: string = '';
+  correoElectronico: string = '';
+  telefono: string = '';
+  redSocial: string = '';
+  nickname: string = '';
+  descripcion: string = '';
 
-    lunes: boolean = false;
-    martes: boolean = false
-    miercoles: boolean = false;
-    jueves: boolean = false
-    viernes: boolean = false;
+  horariosTexto: string = '';
+  archivoParaSubir: File | null = null;
+  imagenPreview: string | null = null;
 
-    //Sarmiento 118 , san martin , direccion previs para el centro cultural 
+  constructor(
+    private tallerService: TallerService,
+    private router: Router,
+    private cdr: ChangeDetectorRef,
+  ) {}
 
-    limpiarDireccion() {
-        if (this.esCentroCultural) {
-            this.calle = '';
-            this.altura = null;
-            this.localidad = '';
-        }
+  saveWorkshop() {
+    const proximoId =
+      WORKSHOP_MOCK.length > 0 ? Math.max(...WORKSHOP_MOCK.map((t) => t.id)) + 1 : 1;
+
+    const nuevoTaller: ITallerCultural = {
+      id: proximoId,
+      nombre: this.nombreTaller,
+      imagen: this.imagenBase64 || '',
+      rubro: this.rubro,
+      telefono: this.telefono,
+      email: this.correoElectronico,
+      atencion: this.horariosTexto,
+
+      descripcion: this.descripcion || '',
+      habilitado: false,
+      redesSociales: this.tieneRedSocial ? this.redSocial + '/' + this.nickname : '',
+      direccionesNormalizadas: [
+        {
+          altura: Number(this.altura),
+          cod_calle: 0,
+          cod_calle_cruce: null,
+          cod_partido: '',
+          coordenadas: { srid: 4326, x: 0, y: 0 },
+          direccion: `${this.calle} ${this.altura}, ${this.localidad}`,
+          nombre_calle: this.calle,
+          nombre_calle_cruce: '',
+          nombre_localidad: this.localidad,
+          nombre_partido: '',
+          tipo: 'calle_altura',
+        },
+      ],
+    };
+
+    this.tallerService.addWorkshop(nuevoTaller);
+    this.router.navigate(['/*']);
+  }
+
+  clearDirection() {
+    if (this.esCentroCultural) {
+      this.calle = '';
+      this.altura = '';
+      this.localidad = '';
     }
+  }
 
-    haveRedSocial() {
-      this.tieneRedSocial = this.redSocial !== '' && this.redSocial !== 'ninguna';
-      if (!this.tieneRedSocial) {
-        this.nickname = '';
-      }
+  haveRedSocial() {
+    this.tieneRedSocial = this.redSocial !== '' && this.redSocial !== 'ninguna';
+    if (!this.tieneRedSocial) {
+      this.nickname = '';
     }
+  }
 
-    activadoLunes() {
-      this.lunes = !this.lunes;
-    }
-    
-    activadoMartes() {
-      this.martes = !this.martes;
-    }
-    
-    activadoMiercoles() {
-      this.miercoles = !this.miercoles;
-    }
-    
-    activadoJueves() {
-      this.jueves = !this.jueves;
-    }
-    
-    activadoViernes() {
-      this.viernes = !this.viernes;
-    }
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (!file) return;
 
+    const reader = new FileReader();
 
+    reader.onload = () => {
+      this.imagenBase64 = reader.result as string;
+      this.cdr.detectChanges();
+    };
+
+    reader.readAsDataURL(file);
+  }
+
+  removeImage(): void {
+    this.imagenBase64 = '';
+  }
 }
-
-

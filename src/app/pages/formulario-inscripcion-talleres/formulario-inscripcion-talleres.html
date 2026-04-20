@@ -1,32 +1,227 @@
-<head>
-  <link rel="stylesheet" href="formulario-inscripcion-talleres.css">
-</head>
-
-<body>
-  <form>
-    <div>
-      <section class="section-title">   <!-- imagen de referencia  -->
-        <img src="https://chubutahora.com/wp-content/uploads/2026/03/3037593-trelew-apertura-de-inscripciones-a-talleres-culturales.webp" alt="Talleres" class="section-icon">
-        <div>
-          <h2>Formulario de Inscripción a</h2>
-          <h2>"[Talleres]"</h2>
-        </div>
-      </section>
-      <p>Para poder inscribirte a este taller, por favor completa el siguiente formulario:</p>
+<div class="flex flex-col items-center justify-center p-4 min-h-screen bg-slate-50 font-sans">
+  <form
+    (ngSubmit)="saveWorkshop()"
+    class="p-8 bg-white shadow-lg shadow-indigo-950 w-full max-w-2xl gap-6 rounded-2xl"
+  >
+    <div class="flex flex-col gap-2 mb-4">
+      <h2 class="font-semibold text-2xl mb-4 text-center">Registrar nuevo taller</h2>
+      <p class="text-base text-slate-500 text-center">
+        Para poder inscribirte a este taller, por favor completa el siguiente formulario:
+      </p>
     </div>
-    <hr style ="margin-bottom: 20px;">
-    <label for="nombre">Nombre:</label>
-    <input type = "text" id="nombre" required>
-    <label for="apellido">Apellido:</label>
-    <input type = "text" id="apellido" required>
-    <label for="email">Correo Electrónico:</label>
-    <input type = "email" id="email" required>
-    <label for="telefono">Teléfono:</label>
-    <input type = "tel" id="telefono" required>
-    <div class="button-container">
-      <button class="btn-inscription" type="submit">Inscribirse <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon">
-      <path d="M4 12.6111L8.92308 17.5L20 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-      </svg>
+    <hr class="my-4" />
+    <div class="flex flex-col">
+      <label for="nombre" class="mt-3">Nombre del taller:</label>
+      <input
+        type="text"
+        id="nombre"
+        [(ngModel)]="nombreTaller"
+        name="nombreTaller"
+        class="border-b border-[#98c9a3] rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#38B000]"
+        required
+      />
+      <label for="rubro" class="mt-3">Rubro / Categoría:</label>
+      <input
+        type="text"
+        id="rubro"
+        [(ngModel)]="rubro"
+        name="rubro"
+        class="border-b border-[#98c9a3] rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#38B000]"
+        required
+      />
+      <label for="email" class="mt-3">Correo Electrónico:</label>
+      <input
+        type="email"
+        id="email"
+        required
+        [(ngModel)]="correoElectronico"
+        name="correoElectronico"
+        class="border-b border-[#98c9a3] rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#38B000]"
+        required
+      />
+      <label for="telefono" class="mt-3">Teléfono:</label>
+      <input
+        type="tel"
+        pattern="[0-9]*"
+        id="telefono"
+        [(ngModel)]="telefono"
+        name="telefono"
+        class="border-b border-[#98c9a3] rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#38B000]"
+        required
+      />
+      <label class="mt-3 text-lg font-semibold mb-2">Redes sociales</label>
+      <select
+        class="rounded-2xl p-1"
+        [(ngModel)]="redSocial"
+        (change)="haveRedSocial()"
+        name="redSocial"
+      >
+        <option value="" disabled selected>Selecciona una red social</option>
+        <option value="">Ninguna</option>
+        <option value="facebook">Facebook</option>
+        <option value="twitter">Twitter</option>
+        <option value="instagram">Instagram</option>
+        <option value="linkedin">LinkedIn</option>
+      </select>
+      <input
+        type="text"
+        [placeholder]="tieneRedSocial ? 'Ingresar nick de la red social' : ''"
+        [(ngModel)]="nickname"
+        [disabled]="!tieneRedSocial"
+        [required]="tieneRedSocial"
+        name="nickname"
+        class="border-b border-[#98c9a3] rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#38B000] mt-2 disabled:bg-gray-100 disabled:text-gray-400"
+      />
+      <p class="text-sm text-gray-400 p-2">{{ this.redSocial + '/' + this.nickname }}</p>
+    </div>
+
+    <hr class="my-4" />
+
+    <div class="flex flex-col">
+      <label class="mt-3 text-lg font-semibold mb-2">Dirección</label>
+      <div class="m-1">
+        <input
+          type="checkbox"
+          id="CentroCultural"
+          [(ngModel)]="esCentroCultural"
+          (change)="clearDirection()"
+          name="esCentroCultural"
+          class="mr-2"
+        />
+        <label for="CentroCultural" class="mb-2">El taller se dictará en el Centro Cultural</label>
+      </div>
+
+      <label for="calle" class="mt-2">Calle</label>
+      <input
+        type="text"
+        id="calle"
+        [(ngModel)]="calle"
+        [disabled]="esCentroCultural"
+        [required]="!esCentroCultural"
+        name="calle"
+        class="border-b border-[#98c9a3] rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#38B000] disabled:bg-gray-100 disabled:text-gray-400"
+      />
+
+      <label for="altura" class="mt-2">Altura</label>
+      <input
+        type="text"
+        id="altura"
+        [(ngModel)]="altura"
+        [disabled]="esCentroCultural"
+        [required]="!esCentroCultural"
+        name="altura"
+        class="border-b border-[#98c9a3] rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#38B000] disabled:bg-gray-100 disabled:text-gray-400"
+      />
+
+      <label for="localidad" class="mt-2">Localidad</label>
+      <input
+        type="text"
+        id="localidad"
+        [(ngModel)]="localidad"
+        [disabled]="esCentroCultural"
+        [required]="!esCentroCultural"
+        name="localidad"
+        class="border-b border-[#98c9a3] rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#38B000] disabled:bg-gray-100 disabled:text-gray-400"
+      />
+    </div>
+
+    <hr class="my-4" />
+
+    <label class="font-semibold text-lg" for="horariosTexto">Horario</label>
+    <div class="flex flex-col mb-3">
+      <input
+        type="text"
+        id="horariosTexto"
+        [(ngModel)]="horariosTexto"
+        name="horariosTexto"
+        placeholder="Ej: Lunes y jueves de 16:00HS a 18:00HS"
+        class="border-b border-[#98c9a3] rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#38B000]"
+        required
+      />
+    </div>
+
+    <hr />
+
+    <div class="flex flex-col">
+      <label class="mt-3 font-semibold text-lg">Descripción</label>
+      <textarea
+        id="descripcion"
+        [(ngModel)]="descripcion"
+        name="descripcion"
+        class="border-b border-[#98c9a3] rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#006400]"
+        required
+      ></textarea>
+    </div>
+
+    <hr />
+    <div class="flex flex-col">
+      <h2 class="mt-3 font-semibold text-lg">Imagen del taller</h2>
+      <label
+        *ngIf="!imagenBase64"
+        class="flex flex-col items-center justify-center w-full p-6 border-2 border-dashed rounded-xl cursor-pointer border-gray-300 hover:border-indigo-500 hover:bg-indigo-50 transition"
+      >
+        <div class="flex flex-col items-center gap-2 text-gray-600">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-10 h-10 text-indigo-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M7 16V4m0 0L3 8m4-4l4 4m6 4v8m0 0l4-4m-4 4l-4-4"
+            />
+          </svg>
+
+          <span class="font-semibold">Subir imagen</span>
+          <span class="text-sm text-gray-400">PNG, JPG hasta 5MB</span>
+        </div>
+
+        <input type="file" accept="image/*" (change)="onFileSelected($event)" class="hidden" />
+      </label>
+
+      <div *ngIf="imagenBase64" class="relative mt-4 w-48 h-48">
+        <img
+          [src]="imagenBase64 | safe: 'url'"
+          class="w-full h-full object-cover rounded-xl shadow-md border"
+        />
+        <button
+          type="button"
+          (click)="removeImage()"
+          class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 shadow-lg hover:bg-red-600 transition"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="px-3 mt-8 flex flex-wrap justify-end gap-3">
+      <a
+        routerLink="/"
+        class="rounded-xl px-5 h-10 border-2 border-slate-200 text-slate-600 flex items-center justify-center gap-2 hover:bg-slate-50 transition-all duration-200"
+      >
+        Volver al inicio
+      </a>
+
+      <button
+        type="submit"
+        class="rounded-xl px-8 h-10 bg-[#38B000] text-white font-semibold flex items-center justify-center gap-2 hover:bg-[#2d8e00] hover:shadow-lg hover:shadow-green-100 active:scale-95 transition-all duration-200"
+      >
+        Registrar taller
       </button>
     </div>
   </form>
