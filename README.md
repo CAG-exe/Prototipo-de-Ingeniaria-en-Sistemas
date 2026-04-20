@@ -1,47 +1,67 @@
-# Prototipo Sistema de Gestión de Talleres Culturales
+# 🎨 Sistema de Gestión de Talleres Culturales
 
-Este proyecto es un prototipo para la gestión e inscripción de talleres culturales, desarrollado con **Angular** y un servidor de persistencia local en **Node.js**.
+Este proyecto es un **Prototipo para la Gestión e Inscripción de Talleres Culturales**, desarrollado con **Angular**. Diseñado para facilitar la administración de actividades culturales y la inscripción de usuarios en un entorno moderno y eficiente.
+
+---
+
+## ✨ Características Principales
+- **Gestión de Talleres**: Panel para visualizar y administrar talleres.
+- **Formulario de Inscripción**: Sistema intuitivo para el registro de nuevos talleres con soporte para imágenes.
+- **Búsqueda Avanzada**: Filtros dinámicos por rubro y localidad.
+- **Persistencia Local**: Sistema que guarda los datos directamente en archivos del proyecto para facilitar el desarrollo sin bases de datos complejas.
+
+---
+
+## 🛠️ Tecnologías Utilizadas
+- **Frontend**: [Angular 21](https://angular.io/) (TypeScript)
+- **Estilos**: [Tailwind CSS 4](https://tailwindcss.com/)
+- **Gestor de Paquetes**: npm
+
+---
 
 ## 🚀 Requisitos Previos
-
 Asegúrate de tener instalado:
-- [Node.js](https://nodejs.org/) (versión 18 o superior recomendada)
-- [npm](https://www.npmjs.com/)
+- **Node.js** (versión 18 o superior recomendada)
+- **npm** (integrado con Node.js)
 
-## 🛠️ Instalación
+---
 
-1. Clona o descarga el repositorio.
-2. Instala las dependencias del proyecto:
-   ```bash
-   npm install
-   ```
+## 💻 Instalación y Ejecución
 
-## 💻 Ejecución del Proyecto
+Sigue estos pasos para levantar el proyecto localmente:
 
-Para que el sistema funcione completamente (incluyendo el registro de nuevos talleres y subida de imágenes), necesitas ejecutar **dos comandos** en terminales separadas:
-
-### 1. Servidor de Persistencia (Backend)
-Este servidor se encarga de recibir las imágenes y guardar los datos en el archivo `workshops.ts`.
+### 1. Clonar el repositorio
 ```bash
-npm run server
+git clone <url-del-repositorio>
+cd Prototipo-de-Ingeniaria-en-Sistemas
 ```
-*El servidor escuchará en `http://localhost:3000`.*
 
-### 2. Aplicación Angular (Frontend)
-Inicia la interfaz de usuario.
+### 2. Instalar dependencias
+```bash
+npm install
+```
+
+### 3. Levantar el proyecto
+Inicia la interfaz de usuario en modo desarrollo:
 ```bash
 npm run start
 ```
-*La aplicación estará disponible en `http://localhost:4200`.*
-
-## 📂 Estructura de Persistencia
-
-- **Datos**: Los talleres se guardan directamente en `src/app/Data/workshops.ts`.
-- **Imágenes**: Las imágenes subidas se almacenan en la carpeta `public/images/talleres/` para que Angular las sirva automáticamente.
-
-## 📝 Notas de Uso
-- Al registrar un taller, la imagen aparecerá en la carpeta `public`. Debido a cómo funciona el servidor de desarrollo de Angular, es posible que debas refrescar el navegador una vez para que la nueva imagen sea detectada y mostrada correctamente.
-- El servidor de Node.js utiliza `express`, `multer` y `cors` para gestionar la persistencia local sin necesidad de una base de datos externa.
+*La aplicación se abrirá automáticamente en [http://localhost:4200](http://localhost:4200).*
 
 ---
-© 2026 Proyecto de Ingeniería en Sistemas
+
+## 📂 Estructura de Persistencia
+El sistema utiliza una arquitectura simplificada para el prototipado:
+
+- **Almacenamiento**: Los datos se gestionan de forma local en el navegador (in-memory) a través de servicios de Angular.
+- **Manejo de Imágenes**: Las imágenes se procesan y almacenan como cadenas **Base64** dentro de los mismos objetos de datos, eliminando la necesidad de un servidor de archivos externo.
+- **Datos Iniciales**: El archivo `src/app/Data/workshops.ts` sirve como base de datos inicial para el prototipo.
+
+---
+
+## 📝 Notas de Uso Importantes
+1. **Persistencia**: Actualmente el sistema utiliza almacenamiento local para el prototipado (in-memory). Los cambios se mantienen durante la sesión actual del navegador.
+
+---
+
+© 2026 - Proyecto de Ingeniería en Sistemas
