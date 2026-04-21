@@ -1,21 +1,34 @@
-export interface ICoordenadas {
-  srid: number;
-  x: number;
-  y: number;
+export interface INominatimAddress {
+  road?: string;
+  house_number?: string;
+  quarter?: string;
+  suburb?: string;
+  town?: string;
+  city?: string;
+  state_district?: string;
+  state?: string;
+  postcode?: string;
+  country?: string;
+  country_code?: string;
+  [key: string]: string | undefined;
 }
 
-export interface IDireccionNormalizada {
-  altura: number;
-  cod_calle: number;
-  cod_calle_cruce?: number | null;
-  cod_partido: string;
-  coordenadas: ICoordenadas;
-  direccion: string;
-  nombre_calle: string;
-  nombre_calle_cruce?: string;
-  nombre_localidad: string;
-  nombre_partido: string;
-  tipo: string;
+export interface INominatimDireccion {
+  place_id: number;
+  licence: string;
+  osm_type: string;
+  osm_id: number;
+  lat: string;
+  lon: string;
+  class: string;
+  type: string;
+  place_rank: number;
+  importance: number;
+  addresstype: string;
+  name: string;
+  display_name: string;
+  address: INominatimAddress;
+  boundingbox: [string, string, string, string];
 }
 
 export interface ITallerCultural {
@@ -29,5 +42,5 @@ export interface ITallerCultural {
   redesSociales: string;
   descripcion: string;
   habilitado: boolean;
-  direccionesNormalizadas: IDireccionNormalizada[];
+  direccion: INominatimDireccion | null;
 }

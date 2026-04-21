@@ -10,25 +10,38 @@
     "descripcion": "Espacio dedicado a preservar danzas folklóricas argentinas para todas las edades.",
     "habilitado": true,
     "redesSociales": "Instagram/raicesdelnorte",
-    "direccionesNormalizadas": [
-      {
-        "altura": 2100,
-        "cod_calle": 12001,
-        "cod_calle_cruce": null,
-        "cod_partido": "malvinas_argentinas",
-        "coordenadas": {
-          "srid": 4326,
-          "x": -58.70521,
-          "y": -34.51562
-        },
-        "direccion": "Av. Presidente Perón 2100, Los Polvorines",
-        "nombre_calle": "Av. Presidente Perón",
-        "nombre_calle_cruce": "",
-        "nombre_localidad": "Los Polvorines",
-        "nombre_partido": "Malvinas Argentinas",
-        "tipo": "calle_altura"
-      }
-    ]
+    "direccion": {
+      "place_id": 16455464,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 282187503,
+      "lat": "-34.5155436",
+      "lon": "-58.6744517",
+      "class": "highway",
+      "type": "secondary",
+      "place_rank": 26,
+      "importance": 0.05338259327077131,
+      "addresstype": "road",
+      "name": "Avenida Presidente Juan Domingo Perón",
+      "display_name": "Avenida Presidente Juan Domingo Perón, Guadalupe, Los Polvorines, Partido de Malvinas Argentinas, Buenos Aires, 1660, Argentina",
+      "address": {
+        "road": "Avenida Presidente Juan Domingo Perón",
+        "quarter": "Guadalupe",
+        "town": "Los Polvorines",
+        "state_district": "Partido de Malvinas Argentinas",
+        "state": "Buenos Aires",
+        "ISO3166-2-lvl4": "AR-B",
+        "postcode": "1660",
+        "country": "Argentina",
+        "country_code": "ar"
+      },
+      "boundingbox": [
+        "-34.5156257",
+        "-34.5154614",
+        "-58.6745471",
+        "-58.6743563"
+      ]
+    }
   },
   {
     "id": 2,
@@ -41,25 +54,37 @@
     "descripcion": "Taller de muralismo, graffiti y arte callejero para jóvenes.",
     "habilitado": false,
     "redesSociales": "Instagram/arteurbano_nogues",
-    "direccionesNormalizadas": [
-      {
-        "altura": 950,
-        "cod_calle": 12002,
-        "cod_calle_cruce": null,
-        "cod_partido": "malvinas_argentinas",
-        "coordenadas": {
-          "srid": 4326,
-          "x": -58.72533,
-          "y": -34.48911
-        },
-        "direccion": "Maipú 950, Ing. Pablo Nogués",
-        "nombre_calle": "Maipú",
-        "nombre_calle_cruce": "",
-        "nombre_localidad": "Ing. Pablo Nogués",
-        "nombre_partido": "Malvinas Argentinas",
-        "tipo": "calle_altura"
-      }
-    ]
+    "direccion": {
+      "place_id": 16305576,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 54156852,
+      "lat": "-34.4890327",
+      "lon": "-58.7253177",
+      "class": "highway",
+      "type": "tertiary",
+      "place_rank": 26,
+      "importance": 0.05338194781414508,
+      "addresstype": "road",
+      "name": "Yernoli",
+      "display_name": "Yernoli, Grand Bourg, Partido de Malvinas Argentinas, Buenos Aires, 1615, Argentina",
+      "address": {
+        "road": "Yernoli",
+        "town": "Grand Bourg",
+        "state_district": "Partido de Malvinas Argentinas",
+        "state": "Buenos Aires",
+        "ISO3166-2-lvl4": "AR-B",
+        "postcode": "1615",
+        "country": "Argentina",
+        "country_code": "ar"
+      },
+      "boundingbox": [
+        "-34.4891924",
+        "-34.4889077",
+        "-58.7261036",
+        "-58.7243143"
+      ]
+    }
   },
   {
     "id": 3,
@@ -72,25 +97,37 @@
     "descripcion": "Clases iniciales y avanzadas de guitarra, piano y teoría musical.",
     "habilitado": false,
     "redesSociales": "Instagram/casamusica.gb",
-    "direccionesNormalizadas": [
-      {
-        "altura": 1340,
-        "cod_calle": 12003,
-        "cod_calle_cruce": null,
-        "cod_partido": "malvinas_argentinas",
-        "coordenadas": {
-          "srid": 4326,
-          "x": -58.73742,
-          "y": -34.46188
-        },
-        "direccion": "José Hernández 1340, Grand Bourg",
-        "nombre_calle": "José Hernández",
-        "nombre_calle_cruce": "",
-        "nombre_localidad": "Grand Bourg",
-        "nombre_partido": "Malvinas Argentinas",
-        "tipo": "calle_altura"
-      }
-    ]
+    "direccion": {
+      "place_id": 16414775,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 255314317,
+      "lat": "-34.5044907",
+      "lon": "-58.7347780",
+      "class": "highway",
+      "type": "tertiary",
+      "place_rank": 26,
+      "importance": 0.05338194781414508,
+      "addresstype": "road",
+      "name": "José Hernández",
+      "display_name": "José Hernández, Grand Bourg, Partido de Malvinas Argentinas, Buenos Aires, 1515, Argentina",
+      "address": {
+        "road": "José Hernández",
+        "town": "Grand Bourg",
+        "state_district": "Partido de Malvinas Argentinas",
+        "state": "Buenos Aires",
+        "ISO3166-2-lvl4": "AR-B",
+        "postcode": "1515",
+        "country": "Argentina",
+        "country_code": "ar"
+      },
+      "boundingbox": [
+        "-34.5067078",
+        "-34.5022701",
+        "-58.7365017",
+        "-58.7330501"
+      ]
+    }
   },
   {
     "id": 4,
@@ -103,25 +140,37 @@
     "descripcion": "Entrenamiento actoral, improvisación y puesta en escena.",
     "habilitado": true,
     "redesSociales": "Facebook/Laboratorio Teatral Zona Norte",
-    "direccionesNormalizadas": [
-      {
-        "altura": 420,
-        "cod_calle": 12004,
-        "cod_calle_cruce": null,
-        "cod_partido": "malvinas_argentinas",
-        "coordenadas": {
-          "srid": 4326,
-          "x": -58.70155,
-          "y": -34.52342
-        },
-        "direccion": "Rivadavia 420, Los Polvorines",
-        "nombre_calle": "Rivadavia",
-        "nombre_calle_cruce": "",
-        "nombre_localidad": "Los Polvorines",
-        "nombre_partido": "Malvinas Argentinas",
-        "tipo": "calle_altura"
-      }
-    ]
+    "direccion": {
+      "place_id": 17079493,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 54253249,
+      "lat": "-34.5202742",
+      "lon": "-58.7160402",
+      "class": "highway",
+      "type": "tertiary",
+      "place_rank": 26,
+      "importance": 0.053385147631036814,
+      "addresstype": "road",
+      "name": "Comodoro Rivadavia",
+      "display_name": "Comodoro Rivadavia, Los Polvorines, Partido de Malvinas Argentinas, Buenos Aires, B1613, Argentina",
+      "address": {
+        "road": "Comodoro Rivadavia",
+        "town": "Los Polvorines",
+        "state_district": "Partido de Malvinas Argentinas",
+        "state": "Buenos Aires",
+        "ISO3166-2-lvl4": "AR-B",
+        "postcode": "B1613",
+        "country": "Argentina",
+        "country_code": "ar"
+      },
+      "boundingbox": [
+        "-34.5213410",
+        "-34.5192183",
+        "-58.7171465",
+        "-58.7149231"
+      ]
+    }
   },
   {
     "id": 5,
@@ -134,25 +183,37 @@
     "descripcion": "Modelado y esmaltado de piezas en cerámica artesanal.",
     "habilitado": true,
     "redesSociales": "Instagram/tierra.viva.ceramica",
-    "direccionesNormalizadas": [
-      {
-        "altura": 780,
-        "cod_calle": 12005,
-        "cod_calle_cruce": null,
-        "cod_partido": "malvinas_argentinas",
-        "coordenadas": {
-          "srid": 4326,
-          "x": -58.71561,
-          "y": -34.50671
-        },
-        "direccion": "San Martín 780, Los Polvorines",
-        "nombre_calle": "San Martín",
-        "nombre_calle_cruce": "",
-        "nombre_localidad": "Los Polvorines",
-        "nombre_partido": "Malvinas Argentinas",
-        "tipo": "calle_altura"
-      }
-    ]
+    "direccion": {
+      "place_id": 16791310,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 462674980,
+      "lat": "-34.5061879",
+      "lon": "-58.7043155",
+      "class": "highway",
+      "type": "residential",
+      "place_rank": 26,
+      "importance": 0.05338259327077131,
+      "addresstype": "road",
+      "name": "San Martín",
+      "display_name": "San Martín, Los Polvorines, Partido de Malvinas Argentinas, Buenos Aires, B1613, Argentina",
+      "address": {
+        "road": "San Martín",
+        "town": "Los Polvorines",
+        "state_district": "Partido de Malvinas Argentinas",
+        "state": "Buenos Aires",
+        "ISO3166-2-lvl4": "AR-B",
+        "postcode": "B1613",
+        "country": "Argentina",
+        "country_code": "ar"
+      },
+      "boundingbox": [
+        "-34.5093077",
+        "-34.5033077",
+        "-58.7086211",
+        "-58.6999617"
+      ]
+    }
   },
   {
     "id": 6,
@@ -165,25 +226,37 @@
     "descripcion": "Fotografía digital, iluminación y edición.",
     "habilitado": false,
     "redesSociales": "Instagram/flashnorte",
-    "direccionesNormalizadas": [
-      {
-        "altura": 1220,
-        "cod_calle": 12006,
-        "cod_calle_cruce": null,
-        "cod_partido": "malvinas_argentinas",
-        "coordenadas": {
-          "srid": 4326,
-          "x": -58.73288,
-          "y": -34.47255
-        },
-        "direccion": "Belgrano 1220, Grand Bourg",
-        "nombre_calle": "Belgrano",
-        "nombre_calle_cruce": "",
-        "nombre_localidad": "Grand Bourg",
-        "nombre_partido": "Malvinas Argentinas",
-        "tipo": "calle_altura"
-      }
-    ]
+    "direccion": {
+      "place_id": 389552662,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 1336973571,
+      "lat": "-34.4708883",
+      "lon": "-58.7353281",
+      "class": "leisure",
+      "type": "pitch",
+      "place_rank": 30,
+      "importance": 4.821622034023068e-05,
+      "addresstype": "leisure",
+      "name": "",
+      "display_name": "Canadá, Tierras Altas, Partido de Malvinas Argentinas, Buenos Aires, 1667, Argentina",
+      "address": {
+        "road": "Canadá",
+        "town": "Tierras Altas",
+        "state_district": "Partido de Malvinas Argentinas",
+        "state": "Buenos Aires",
+        "ISO3166-2-lvl4": "AR-B",
+        "postcode": "1667",
+        "country": "Argentina",
+        "country_code": "ar"
+      },
+      "boundingbox": [
+        "-34.4713901",
+        "-34.4703862",
+        "-58.7359906",
+        "-58.7346657"
+      ]
+    }
   },
   {
     "id": 7,
@@ -196,25 +269,39 @@
     "descripcion": "Expresión corporal y danza contemporánea.",
     "habilitado": true,
     "redesSociales": "Instagram/danzalibre",
-    "direccionesNormalizadas": [
-      {
-        "altura": 540,
-        "cod_calle": 12007,
-        "cod_calle_cruce": null,
-        "cod_partido": "malvinas_argentinas",
-        "coordenadas": {
-          "srid": 4326,
-          "x": -58.69821,
-          "y": -34.51874
-        },
-        "direccion": "Mitre 540, Los Polvorines",
-        "nombre_calle": "Mitre",
-        "nombre_calle_cruce": "",
-        "nombre_localidad": "Los Polvorines",
-        "nombre_partido": "Malvinas Argentinas",
-        "tipo": "calle_altura"
-      }
-    ]
+    "direccion": {
+      "place_id": 17562520,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 915957945,
+      "lat": "-34.5179428",
+      "lon": "-58.6988565",
+      "class": "highway",
+      "type": "service",
+      "place_rank": 27,
+      "importance": 0.040049259937438,
+      "addresstype": "road",
+      "name": "Carlos Pellegrini",
+      "display_name": "Carlos Pellegrini, Los Nogales, El Cortijo, Los Polvorines, Partido de Malvinas Argentinas, Buenos Aires, B1613, Argentina",
+      "address": {
+        "road": "Carlos Pellegrini",
+        "residential": "Los Nogales",
+        "quarter": "El Cortijo",
+        "town": "Los Polvorines",
+        "state_district": "Partido de Malvinas Argentinas",
+        "state": "Buenos Aires",
+        "ISO3166-2-lvl4": "AR-B",
+        "postcode": "B1613",
+        "country": "Argentina",
+        "country_code": "ar"
+      },
+      "boundingbox": [
+        "-34.5195926",
+        "-34.5170401",
+        "-58.7008767",
+        "-58.6977433"
+      ]
+    }
   },
   {
     "id": 8,
@@ -227,25 +314,37 @@
     "descripcion": "Encuentros de lectura y debate literario.",
     "habilitado": true,
     "redesSociales": "Facebook/Club El Andén",
-    "direccionesNormalizadas": [
-      {
-        "altura": 310,
-        "cod_calle": 12008,
-        "cod_calle_cruce": null,
-        "cod_partido": "malvinas_argentinas",
-        "coordenadas": {
-          "srid": 4326,
-          "x": -58.72091,
-          "y": -34.49561
-        },
-        "direccion": "Paso 310, Ing. Pablo Nogués",
-        "nombre_calle": "Paso",
-        "nombre_calle_cruce": "",
-        "nombre_localidad": "Ing. Pablo Nogués",
-        "nombre_partido": "Malvinas Argentinas",
-        "tipo": "calle_altura"
-      }
-    ]
+    "direccion": {
+      "place_id": 16250943,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 54168758,
+      "lat": "-34.4957225",
+      "lon": "-58.7210525",
+      "class": "highway",
+      "type": "residential",
+      "place_rank": 26,
+      "importance": 0.05338194781414508,
+      "addresstype": "road",
+      "name": "Uspallata",
+      "display_name": "Uspallata, Grand Bourg, Partido de Malvinas Argentinas, Buenos Aires, 1515, Argentina",
+      "address": {
+        "road": "Uspallata",
+        "town": "Grand Bourg",
+        "state_district": "Partido de Malvinas Argentinas",
+        "state": "Buenos Aires",
+        "ISO3166-2-lvl4": "AR-B",
+        "postcode": "1515",
+        "country": "Argentina",
+        "country_code": "ar"
+      },
+      "boundingbox": [
+        "-34.5030572",
+        "-34.4911507",
+        "-58.7246492",
+        "-58.7153861"
+      ]
+    }
   },
   {
     "id": 9,
@@ -258,25 +357,37 @@
     "descripcion": "Escultura en madera, yeso y materiales reciclados.",
     "habilitado": false,
     "redesSociales": "Instagram/escultura.norte",
-    "direccionesNormalizadas": [
-      {
-        "altura": 1670,
-        "cod_calle": 12009,
-        "cod_calle_cruce": null,
-        "cod_partido": "malvinas_argentinas",
-        "coordenadas": {
-          "srid": 4326,
-          "x": -58.74211,
-          "y": -34.46352
-        },
-        "direccion": "Urquiza 1670, Grand Bourg",
-        "nombre_calle": "Urquiza",
-        "nombre_calle_cruce": "",
-        "nombre_localidad": "Grand Bourg",
-        "nombre_partido": "Malvinas Argentinas",
-        "tipo": "calle_altura"
-      }
-    ]
+    "direccion": {
+      "place_id": 16294403,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 57753173,
+      "lat": "-34.4633346",
+      "lon": "-58.7418707",
+      "class": "highway",
+      "type": "residential",
+      "place_rank": 26,
+      "importance": 0.05338154955367357,
+      "addresstype": "road",
+      "name": "Bogado",
+      "display_name": "Bogado, Tortuguitas, Partido de Malvinas Argentinas, Buenos Aires, 1667, Argentina",
+      "address": {
+        "road": "Bogado",
+        "city": "Tortuguitas",
+        "state_district": "Partido de Malvinas Argentinas",
+        "state": "Buenos Aires",
+        "ISO3166-2-lvl4": "AR-B",
+        "postcode": "1667",
+        "country": "Argentina",
+        "country_code": "ar"
+      },
+      "boundingbox": [
+        "-34.4705288",
+        "-34.4632482",
+        "-58.7419377",
+        "-58.7362918"
+      ]
+    }
   },
   {
     "id": 10,
@@ -289,24 +400,36 @@
     "descripcion": "Clases de pintura acrílica y óleo para principiantes.",
     "habilitado": true,
     "redesSociales": "Instagram/puertasabiertas.cc",
-    "direccionesNormalizadas": [
-      {
-        "altura": 600,
-        "cod_calle": 12010,
-        "cod_calle_cruce": null,
-        "cod_partido": "malvinas_argentinas",
-        "coordenadas": {
-          "srid": 4326,
-          "x": -58.70991,
-          "y": -34.50792
-        },
-        "direccion": "Sarmiento 600, Los Polvorines",
-        "nombre_calle": "Sarmiento",
-        "nombre_calle_cruce": "",
-        "nombre_localidad": "Los Polvorines",
-        "nombre_partido": "Malvinas Argentinas",
-        "tipo": "calle_altura"
-      }
-    ]
+    "direccion": {
+      "place_id": 17120801,
+      "licence": "Data © OpenStreetMap contributors, ODbL 1.0. http://osm.org/copyright",
+      "osm_type": "way",
+      "osm_id": 57745017,
+      "lat": "-34.4918914",
+      "lon": "-58.6972152",
+      "class": "highway",
+      "type": "residential",
+      "place_rank": 26,
+      "importance": 0.053370834668497714,
+      "addresstype": "road",
+      "name": "Capitán Sarmiento",
+      "display_name": "Capitán Sarmiento, Los Polvorines, Partido de Malvinas Argentinas, Buenos Aires, B1613ASD, Argentina",
+      "address": {
+        "road": "Capitán Sarmiento",
+        "town": "Los Polvorines",
+        "state_district": "Partido de Malvinas Argentinas",
+        "state": "Buenos Aires",
+        "ISO3166-2-lvl4": "AR-B",
+        "postcode": "B1613ASD",
+        "country": "Argentina",
+        "country_code": "ar"
+      },
+      "boundingbox": [
+        "-34.4922048",
+        "-34.4915573",
+        "-58.6978518",
+        "-58.6965867"
+      ]
+    }
   }
 ]
