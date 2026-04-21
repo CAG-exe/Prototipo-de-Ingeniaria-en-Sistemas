@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ITallerCultural } from '../../Domain/Interfaces/ITallerCultural';
+import { ITallerCultural, IGeorefDireccion } from '../../Domain/Interfaces/ITallerCultural';
 import { RouterLink, Router } from '@angular/router';
 import { TallerService } from '../../Domain/Services/TallerServices';
 import { UserService } from '../../Domain/Services/UsersServices';
-import { NgIf } from '@angular/common';
+import { NgIf, NgFor } from '@angular/common';
 import { SafePipe } from '../../Shared/Pipes/safe.pipe';
 import { ChangeDetectorRef } from '@angular/core';
+import { MapService } from '../../components/map/map.service';
 
 @Component({
   selector: 'app-formulario-inscripcion-talleres',
-  imports: [FormsModule, RouterLink, NgIf, SafePipe],
+  imports: [FormsModule, RouterLink, NgIf, NgFor, SafePipe],
   templateUrl: './formulario-inscripcion-talleres.html',
   styleUrl: './formulario-inscripcion-talleres.css',
 })
@@ -21,9 +22,15 @@ export class FormularioInscripcionTalleres {
   esCentroCultural: boolean = false;
   tieneRedSocial: boolean = false;
 
-  calle: string = '';
-  altura: string = '';
-  localidad: string = '';
+  direccionQuery: string = '';
+  sugerencias: IGeorefDireccion[] = [];
+  direccionSeleccionada: IGeorefDireccion | null = null;
+  buscandoDireccion: boolean = false;
+  mostrarSugerencias: boolean = false;
+  sinResultados: boolean = false;
+
+  private debounceTimer: ReturnType<typeof setTimeout> | null = null;
+
   nombreTaller: string = '';
   correoElectronico: string = '';
   telefono: string = '';
@@ -40,6 +47,7 @@ export class FormularioInscripcionTalleres {
     private userService: UserService,
     private router: Router,
     private cdr: ChangeDetectorRef,
+    private mapService: MapService,
   ) {}
 
   saveWorkshop() {
@@ -55,38 +63,25 @@ export class FormularioInscripcionTalleres {
       telefono: this.telefono,
       email: this.correoElectronico,
       atencion: this.horariosTexto,
-
       descripcion: this.descripcion || '',
       habilitado: false,
       redesSociales: this.tieneRedSocial ? this.redSocial + '/' + this.nickname : '',
-      direccionesNormalizadas: [
-        {
-          altura: Number(this.altura),
-          cod_calle: 0,
-          cod_calle_cruce: null,
-          cod_partido: '',
-          coordenadas: { srid: 4326, x: 0, y: 0 },
-          direccion: `${this.calle} ${this.altura}, ${this.localidad}`,
-          nombre_calle: this.calle,
-          nombre_calle_cruce: '',
-          nombre_localidad: this.localidad,
-          nombre_partido: '',
-          tipo: 'calle_altura',
-        },
-      ],
+      direccion: this.esCentroCultural ? null : (this.direccionSeleccionada ?? null),
     };
 
     this.tallerService.addWorkshop(nuevoTaller);
     this.userService.addWorkshopToCurrentUser(nuevoTaller.id);
-    
+
     this.router.navigate(['/*']);
   }
 
   clearDirection() {
     if (this.esCentroCultural) {
-      this.calle = '';
-      this.altura = '';
-      this.localidad = '';
+      this.direccionQuery = '';
+      this.direccionSeleccionada = null;
+      this.sugerencias = [];
+      this.mostrarSugerencias = false;
+      this.sinResultados = false;
     }
   }
 
@@ -95,6 +90,48 @@ export class FormularioInscripcionTalleres {
     if (!this.tieneRedSocial) {
       this.nickname = '';
     }
+  }
+
+  onDireccionInput() {
+    this.direccionSeleccionada = null;
+    if (this.debounceTimer) clearTimeout(this.debounceTimer);
+
+    if (!this.direccionQuery.trim()) {
+      this.sugerencias = [];
+      this.mostrarSugerencias = false;
+      this.buscandoDireccion = false;
+      this.sinResultados = false;
+      return;
+    }
+
+    this.buscandoDireccion = true;
+    this.sinResultados = false;
+    this.debounceTimer = setTimeout(async () => {
+      this.sugerencias = await this.mapService.search(this.direccionQuery, 10);
+      this.buscandoDireccion = false;
+      this.mostrarSugerencias = this.sugerencias.length > 0;
+      this.sinResultados = this.sugerencias.length === 0;
+      this.cdr.detectChanges();
+    }, 500);
+  }
+
+  formatearDireccion(dir: IGeorefDireccion): string {
+    return dir.nomenclatura;
+  }
+
+  seleccionarDireccion(dir: IGeorefDireccion) {
+    this.sugerencias = [];
+    this.mostrarSugerencias = false;
+    this.sinResultados = false;
+    if (this.debounceTimer) clearTimeout(this.debounceTimer);
+    this.direccionQuery = this.formatearDireccion(dir);
+    this.direccionSeleccionada = dir;
+  }
+
+  cerrarSugerencias() {
+    setTimeout(() => {
+      this.mostrarSugerencias = false;
+    }, 150);
   }
 
   onFileSelected(event: any): void {

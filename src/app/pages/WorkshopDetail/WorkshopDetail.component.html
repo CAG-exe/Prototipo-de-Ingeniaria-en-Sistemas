@@ -43,13 +43,12 @@
       </div>
 
       <div class="bg-slate-50/70 rounded-lg p-3 border border-slate-100">
-        <div *ngIf="detail()?.direccionesNormalizadas?.length; else noNormalizedAddresses">
-          <div *ngFor="let direccion of detail()?.direccionesNormalizadas" class="flex flex-wrap gap-x-4 gap-y-1 text-[13.5px] text-slate-700">
-            <p><span class="font-semibold text-slate-500 mr-1">Dirección:</span> {{ direccion.nombre_calle }} {{ direccion.altura }}, {{ direccion.nombre_localidad }}</p>
-            <p><span class="font-semibold text-slate-500 mr-1">Partido:</span> {{ direccion.nombre_partido }}</p>
+        <div *ngIf="detail()?.direccion; else noDireccion">
+          <div class="flex flex-wrap gap-x-4 gap-y-1 text-[13.5px] text-slate-700">
+            <p><span class="font-semibold text-slate-500 mr-1">Dirección:</span> {{ detail()?.direccion?.nomenclatura }}</p>
           </div>
         </div>
-        <ng-template #noNormalizedAddresses>
+        <ng-template #noDireccion>
           <p class="text-[13.5px] text-slate-500 italic"><span class="font-semibold text-slate-500 mr-1 not-italic">Dirección:</span> No disponible.</p>
         </ng-template>
       </div>

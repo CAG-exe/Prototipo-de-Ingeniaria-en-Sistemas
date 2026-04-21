@@ -1,34 +1,11 @@
-export interface INominatimAddress {
-  road?: string;
-  house_number?: string;
-  quarter?: string;
-  suburb?: string;
-  town?: string;
-  city?: string;
-  state_district?: string;
-  state?: string;
-  postcode?: string;
-  country?: string;
-  country_code?: string;
-  [key: string]: string | undefined;
-}
-
-export interface INominatimDireccion {
-  place_id: number;
-  licence: string;
-  osm_type: string;
-  osm_id: number;
-  lat: string;
-  lon: string;
-  class: string;
-  type: string;
-  place_rank: number;
-  importance: number;
-  addresstype: string;
-  name: string;
-  display_name: string;
-  address: INominatimAddress;
-  boundingbox: [string, string, string, string];
+export interface IGeorefDireccion {
+  nomenclatura: string;
+  calle: { id: string; nombre: string; categoria: string };
+  altura: { valor: number; unidad: string | null };
+  localidad_censal: { id: string; nombre: string };
+  departamento: { id: string; nombre: string };
+  provincia: { id: string; nombre: string };
+  ubicacion: { lat: number; lon: number };
 }
 
 export interface ITallerCultural {
@@ -42,5 +19,5 @@ export interface ITallerCultural {
   redesSociales: string;
   descripcion: string;
   habilitado: boolean;
-  direccion: INominatimDireccion | null;
+  direccion: IGeorefDireccion | null;
 }

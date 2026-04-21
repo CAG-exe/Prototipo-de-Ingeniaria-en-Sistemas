@@ -91,38 +91,59 @@
         <label for="CentroCultural" class="mb-2">El taller se dictará en el Centro Cultural</label>
       </div>
 
-      <label for="calle" class="mt-2">Calle</label>
-      <input
-        type="text"
-        id="calle"
-        [(ngModel)]="calle"
-        [disabled]="esCentroCultural"
-        [required]="!esCentroCultural"
-        name="calle"
-        class="border-b border-[#98c9a3] rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#38B000] disabled:bg-gray-100 disabled:text-gray-400"
-      />
+      <div class="relative">
+        <div class="relative">
+          <input
+            type="text"
+            id="direccionQuery"
+            [(ngModel)]="direccionQuery"
+            (ngModelChange)="onDireccionInput()"
+            (blur)="cerrarSugerencias()"
+            [disabled]="esCentroCultural"
+            [required]="!esCentroCultural"
+            name="direccionQuery"
+            placeholder="Ej: Av. Corrientes 1234, Buenos Aires"
+            autocomplete="off"
+            class="w-full border-b border-[#98c9a3] rounded-md py-2 px-3 pr-9 focus:outline-none focus:ring-2 focus:ring-[#38B000] disabled:bg-gray-100 disabled:text-gray-400"
+          />
+          <span
+            *ngIf="buscandoDireccion"
+            class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm animate-spin"
+          >&#9696;</span>
+          <span
+            *ngIf="!buscandoDireccion && direccionSeleccionada"
+            class="absolute right-3 top-1/2 -translate-y-1/2 text-[#38B000] text-base"
+          >&#10003;</span>
+        </div>
 
-      <label for="altura" class="mt-2">Altura</label>
-      <input
-        type="text"
-        id="altura"
-        [(ngModel)]="altura"
-        [disabled]="esCentroCultural"
-        [required]="!esCentroCultural"
-        name="altura"
-        class="border-b border-[#98c9a3] rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#38B000] disabled:bg-gray-100 disabled:text-gray-400"
-      />
+        <ul
+          *ngIf="mostrarSugerencias"
+          class="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden"
+        >
+          <li
+            *ngFor="let s of sugerencias"
+            (mousedown)="seleccionarDireccion(s)"
+            class="px-4 py-3 cursor-pointer hover:bg-green-50 border-b border-gray-100 last:border-none transition-colors"
+          >
+            <span class="block text-sm font-medium text-gray-800">{{ formatearDireccion(s) }}</span>
+          </li>
+        </ul>
+      </div>
 
-      <label for="localidad" class="mt-2">Localidad</label>
-      <input
-        type="text"
-        id="localidad"
-        [(ngModel)]="localidad"
-        [disabled]="esCentroCultural"
-        [required]="!esCentroCultural"
-        name="localidad"
-        class="border-b border-[#98c9a3] rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#38B000] disabled:bg-gray-100 disabled:text-gray-400"
-      />
+      <div
+        *ngIf="!esCentroCultural && (buscandoDireccion || direccionQuery)"
+        class="mt-2 p-3 rounded-lg text-sm border"
+        [class]="direccionSeleccionada ? 'bg-green-50 border-green-200 text-gray-600'
+               : sinResultados       ? 'bg-red-50 border-red-200 text-red-400 italic'
+               :                       'bg-gray-50 border-gray-200 text-gray-400 italic'"
+      >
+        <ng-container *ngIf="direccionSeleccionada">
+          <span class="font-medium not-italic text-[#38B000]">Dirección confirmada:</span>
+          {{ formatearDireccion(direccionSeleccionada) }}
+        </ng-container>
+        <ng-container *ngIf="!direccionSeleccionada && sinResultados">No se encontraron coincidencias.</ng-container>
+        <ng-container *ngIf="!direccionSeleccionada && !sinResultados">Seleccioná un resultado...</ng-container>
+      </div>
     </div>
 
     <hr class="my-4" />

@@ -8,25 +8,20 @@ import {
 } from '@angular/core';
 import { MapComponent } from '../../components/map/map';
 import { Place } from '../../components/map/map.types';
+import { TallerPanel } from '../../components/taller-panel/taller-panel';
 import { TallerService } from '../../Domain/Services/TallerServices';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, Router } from '@angular/router';
 
-const INITIAL_SELECTION_SIZE = 3;
 
-function pickRandom<T>(items: T[], count: number): T[] {
-  const copy = [...items];
-  const picked: T[] = [];
-  while (picked.length < count && copy.length > 0) {
-    const index = Math.floor(Math.random() * copy.length);
-    picked.push(copy.splice(index, 1)[0]);
-  }
-  return picked;
+function normalize(s: string): string {
+  return s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '');
 }
 
 @Component({
   selector: 'app-search-results',
   standalone: true,
-  imports: [MapComponent],
+  imports: [MapComponent, TallerPanel],
   templateUrl: './search-results.html',
   styleUrl: './search-results.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -34,22 +29,23 @@ function pickRandom<T>(items: T[], count: number): T[] {
 export class SearchResults {
   protected readonly allPlaces = signal<Place[]>([]);
   protected readonly searchTerm = signal<string>('');
-  protected readonly selectedPlaces = signal<Place[]>([]);
   protected readonly highlightedPlace = signal<Place | null>(null);
+  protected readonly panelVisible = signal<boolean>(false);
   private readonly viewportPlaces = signal<Place[]>([]);
 
-  protected readonly filteredPlaces = computed(() => {
-    const term = this.searchTerm().toLowerCase();
-    if (!term) return this.allPlaces();
-    return this.allPlaces().filter(p => 
-      p.nombre.toLowerCase().includes(term) || 
-      p.rubro.toLowerCase().includes(term) ||
-      p.direccion.toLowerCase().includes(term)
-    );
+  protected readonly hasQuery = computed(() => this.searchTerm().trim() !== '');
+
+  protected readonly selectedPlaces = computed<Place[]>(() => {
+    const terms = normalize(this.searchTerm()).split(/\s+/).filter(Boolean);
+    if (!terms.length) return [];
+    return this.allPlaces().filter(p => {
+      const haystack = normalize(`${p.nombre} ${p.direccion}`);
+      return terms.every(t => haystack.includes(t));
+    });
   });
 
   protected readonly otherPlaces = computed<Place[]>(() => {
-    const selected = new Set(this.selectedPlaces());
+    const selected = new Set(this.hasQuery() ? this.selectedPlaces() : []);
     const highlighted = this.highlightedPlace();
     const others = this.viewportPlaces().filter((p) => !selected.has(p));
     if (highlighted && !selected.has(highlighted) && !others.includes(highlighted)) {
@@ -60,29 +56,32 @@ export class SearchResults {
 
   private readonly listEl = viewChild.required<ElementRef<HTMLElement>>('listEl');
 
-  constructor(private tallerService: TallerService) {
+  constructor(private tallerService: TallerService, private route: ActivatedRoute, private router: Router) {
+    this.route.queryParamMap.pipe(takeUntilDestroyed()).subscribe((params) => {
+      const q = params.get('q') ?? '';
+      this.searchTerm.set(q);
+      if (!q.trim()) this.highlightedPlace.set(null);
+    });
+
     this.tallerService.workshops$.pipe(takeUntilDestroyed()).subscribe((data) => {
       const places: Place[] = data.map((t) => ({
         ...t,
-        direccion: t.direccionesNormalizadas[0]?.direccion || '',
-        position: t.direccionesNormalizadas[0]
+        direccion: t.direccion?.nomenclatura || '',
+        position: t.direccion
           ? {
-              lat: t.direccionesNormalizadas[0].coordenadas.y,
-              lng: t.direccionesNormalizadas[0].coordenadas.x,
+              lat: t.direccion.ubicacion.lat,
+              lng: t.direccion.ubicacion.lon,
             }
           : null,
       }));
-
       this.allPlaces.set(places);
-      if (this.selectedPlaces().length === 0 && places.length > 0) {
-        this.selectedPlaces.set(pickRandom(places, INITIAL_SELECTION_SIZE));
-      }
     });
   }
 
   protected onPlacesInViewport(places: Place[]): void {
     this.viewportPlaces.set(places);
     this.scrollToHighlighted();
+    if (this.highlightedPlace()) this.panelVisible.set(true);
   }
 
   private scrollToHighlighted(): void {
@@ -97,12 +96,19 @@ export class SearchResults {
   }
 
   protected onPlaceClick(place: Place): void {
-    this.highlightedPlace.update((current) => (current === place ? null : place));
+    const next = this.highlightedPlace() === place ? null : place;
+    this.highlightedPlace.set(next);
+    this.panelVisible.set(false);
   }
 
   protected onSearch(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    this.searchTerm.set(input.value);
+    const value = (event.target as HTMLInputElement).value;
+    this.highlightedPlace.set(null);
+    this.router.navigate([], {
+      queryParams: { q: value || null },
+      queryParamsHandling: 'merge',
+      replaceUrl: true,
+    });
   }
 
 }
