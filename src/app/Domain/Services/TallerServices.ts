@@ -1,16 +1,27 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ITallerCultural } from '../Interfaces/ITallerCultural';
-import { WORKSHOP_MOCK } from '../../Data/workshops';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TallerService {
-  private workshopsSubject = new BehaviorSubject<ITallerCultural[]>(WORKSHOP_MOCK);
+  private workshopsSubject = new BehaviorSubject<ITallerCultural[]>([]);
   workshops$ = this.workshopsSubject.asObservable();
 
-  constructor() {}
+  constructor() {
+    this.loadWorkshops();
+  }
+
+  private async loadWorkshops() {
+    try {
+      const response = await fetch('/workshop.json');
+      const data = await response.json();
+      this.workshopsSubject.next(data);
+    } catch (error) {
+      console.error('Error loading workshops:', error);
+    }
+  }
 
   get workshops(): ITallerCultural[] {
     console.log(this.workshopsSubject.value);

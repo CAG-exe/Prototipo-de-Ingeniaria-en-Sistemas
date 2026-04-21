@@ -2,16 +2,27 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ITallerCultural } from '../Interfaces/ITallerCultural';
 import { IUser } from '../Interfaces/IUser';
-import { USERS_MOCK } from '../../Data/users';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private usersSubject = new BehaviorSubject<IUser[]>(USERS_MOCK);
+  private usersSubject = new BehaviorSubject<IUser[]>([]);
   users$ = this.usersSubject.asObservable();
 
-  constructor() {}
+  constructor() {
+    this.loadUsers();
+  }
+
+  private async loadUsers() {
+    try {
+      const response = await fetch('/users.json');
+      const data = await response.json();
+      this.usersSubject.next(data);
+    } catch (error) {
+      console.error('Error loading users:', error);
+    }
+  }
 
   get users(): IUser[] {
     return this.usersSubject.value;

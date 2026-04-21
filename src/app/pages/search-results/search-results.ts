@@ -8,6 +8,8 @@ import {
 } from '@angular/core';
 import { MapComponent } from '../../components/map/map';
 import { Place } from '../../components/map/map.types';
+import { TallerService } from '../../Domain/Services/TallerServices';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 const INITIAL_SELECTION_SIZE = 3;
 
@@ -31,9 +33,20 @@ function pickRandom<T>(items: T[], count: number): T[] {
 })
 export class SearchResults {
   protected readonly allPlaces = signal<Place[]>([]);
+  protected readonly searchTerm = signal<string>('');
   protected readonly selectedPlaces = signal<Place[]>([]);
   protected readonly highlightedPlace = signal<Place | null>(null);
   private readonly viewportPlaces = signal<Place[]>([]);
+
+  protected readonly filteredPlaces = computed(() => {
+    const term = this.searchTerm().toLowerCase();
+    if (!term) return this.allPlaces();
+    return this.allPlaces().filter(p => 
+      p.nombre.toLowerCase().includes(term) || 
+      p.rubro.toLowerCase().includes(term) ||
+      p.direccion.toLowerCase().includes(term)
+    );
+  });
 
   protected readonly otherPlaces = computed<Place[]>(() => {
     const selected = new Set(this.selectedPlaces());
@@ -47,8 +60,24 @@ export class SearchResults {
 
   private readonly listEl = viewChild.required<ElementRef<HTMLElement>>('listEl');
 
-  constructor() {
-    void this.loadPlaces();
+  constructor(private tallerService: TallerService) {
+    this.tallerService.workshops$.pipe(takeUntilDestroyed()).subscribe((data) => {
+      const places: Place[] = data.map((t) => ({
+        ...t,
+        direccion: t.direccionesNormalizadas[0]?.direccion || '',
+        position: t.direccionesNormalizadas[0]
+          ? {
+              lat: t.direccionesNormalizadas[0].coordenadas.y,
+              lng: t.direccionesNormalizadas[0].coordenadas.x,
+            }
+          : null,
+      }));
+
+      this.allPlaces.set(places);
+      if (this.selectedPlaces().length === 0 && places.length > 0) {
+        this.selectedPlaces.set(pickRandom(places, INITIAL_SELECTION_SIZE));
+      }
+    });
   }
 
   protected onPlacesInViewport(places: Place[]): void {
@@ -71,10 +100,9 @@ export class SearchResults {
     this.highlightedPlace.update((current) => (current === place ? null : place));
   }
 
-  private async loadPlaces(): Promise<void> {
-    const response = await fetch('talleres.json');
-    const data = (await response.json()) as Place[];
-    this.allPlaces.set(data);
-    this.selectedPlaces.set(pickRandom(data, INITIAL_SELECTION_SIZE));
+  protected onSearch(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.searchTerm.set(input.value);
   }
+
 }
