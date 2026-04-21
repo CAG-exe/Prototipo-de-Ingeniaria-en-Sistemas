@@ -1,26 +1,40 @@
 <div style="display: flex; height: 100vh;">
   <aside #listEl style="width: 400px; overflow-y: auto; border-right: 1px solid #e2e8f0; padding: 16px;">
+    <div class="search-container mb-4">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input
+        type="text"
+        placeholder="Buscar talleres, rubros o direcciones..."
+        [value]="searchTerm()"
+        (input)="onSearch($event)"
+        class="search-input"
+      />
+    </div>
     <h1 class="text-xl font-bold mb-2">Talleres</h1>
-    <h2 class="text-sm font-semibold text-slate-600 mb-2">Resultados: {{ selectedPlaces().length }}</h2>
-    @if (selectedPlaces().length === 0) {
-      <p class="text-sm text-slate-500 mb-4">Sin resultados</p>
-    } @else {
-      @for (place of selectedPlaces(); track place.nombre) {
-        <button
-          type="button"
-          [attr.data-place]="place.nombre"
-          (click)="onPlaceClick(place)"
-          [class.ring-2]="place === highlightedPlace()"
-          [class.ring-red-500]="place === highlightedPlace()"
-          class="w-full text-left p-3 border border-slate-200 rounded-lg mb-2 bg-white hover:bg-slate-50 cursor-pointer"
-        >
-          <h3 class="font-semibold">{{ place.nombre }}</h3>
-          <p class="text-sm text-slate-500">{{ place.direccion }}</p>
-        </button>
+    @if (hasQuery()) {
+      <h2 class="text-sm font-semibold text-slate-600 mb-2">Resultados: {{ selectedPlaces().length }}</h2>
+      @if (selectedPlaces().length === 0) {
+        <p class="text-sm text-slate-500 mb-4">Sin resultados</p>
+      } @else {
+        @for (place of selectedPlaces(); track place.nombre) {
+          <button
+            type="button"
+            [attr.data-place]="place.nombre"
+            (click)="onPlaceClick(place)"
+            [class.ring-2]="place === highlightedPlace()"
+            [class.ring-red-500]="place === highlightedPlace()"
+            class="w-full text-left p-3 border border-slate-200 rounded-lg mb-2 bg-white hover:bg-slate-50 cursor-pointer"
+          >
+            <h3 class="font-semibold">{{ place.nombre }}</h3>
+            <p class="text-sm text-slate-500">{{ place.direccion }}</p>
+          </button>
+        }
       }
+      <hr class="my-4 border-slate-200" />
     }
-    <hr class="my-4 border-slate-200" />
-    <h2 class="text-sm font-semibold text-slate-600 mb-2">Otros talleres en la zona</h2>
+    <h2 class="text-sm font-semibold text-slate-600 mb-2">
+      {{ hasQuery() ? 'Otros talleres en el mapa' : 'Talleres en el mapa' }}
+    </h2>
     @if (otherPlaces().length === 0) {
       <p class="text-sm text-slate-500">Ninguno en el área visible</p>
     } @else {
@@ -40,34 +54,23 @@
     }
   </aside>
   <section style="flex: 1; height: 100%; position: relative;">
-    <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; width: 400px; max-width: 90%;">
-      <div class="search-container">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        <input 
-          type="text" 
-          placeholder="Buscar talleres, rubros o direcciones..." 
-          (input)="onSearch($event)"
-          class="search-input"
-        />
-      </div>
-    </div>
-
-    @if (filteredPlaces().length > 0) {
+    @if (allPlaces().length > 0) {
       <app-map
-        [places]="filteredPlaces()"
+        [places]="allPlaces()"
         [selectedPlaces]="selectedPlaces()"
         [highlightedPlace]="highlightedPlace()"
         (placesInViewport)="onPlacesInViewport($event)"
         (placeClicked)="onPlaceClick($event)"
       />
-    } @else if (searchTerm() !== '') {
-      <div class="empty-results">
-        <p>No se encontraron talleres que coincidan con "{{ searchTerm() }}"</p>
-      </div>
     } @else {
-        <div class="empty-results">
-            <p>Cargando talleres...</p>
-        </div>
+      <div class="empty-results">
+        <p>Cargando talleres...</p>
+      </div>
+    }
+
+
+    @if (panelVisible() && highlightedPlace(); as place) {
+      <app-taller-panel [place]="place" (cerrar)="onPlaceClick(place)" />
     }
   </section>
 </div>
