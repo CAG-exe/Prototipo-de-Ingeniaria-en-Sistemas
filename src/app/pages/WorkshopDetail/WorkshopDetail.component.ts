@@ -1,4 +1,4 @@
-import { Component, OnInit, input } from '@angular/core';
+import { Component, OnInit, input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ITallerCultural } from '../../Domain/Interfaces/ITallerCultural';
 import { SafePipe } from '../../Shared/Pipes/safe.pipe';
@@ -12,11 +12,25 @@ import { TallerService } from '../../Domain/Services/TallerServices';
   imports: [CommonModule, SafePipe],
 })
 export class WorkshopDetailComponent implements OnInit {
-  readonly detail = input<ITallerCultural>();
+  readonly detailInput = input<ITallerCultural>(undefined, { alias: 'detail' });
+  readonly id = input<string>(); // Recibe el ID desde la ruta si existe
+
+  private workshopDetail = signal<ITallerCultural | undefined>(undefined);
 
   constructor(private workshopService: TallerService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.detailInput()) {
+      this.workshopDetail.set(this.detailInput());
+    } else if (this.id()) {
+      const found = this.workshopService.workshops.find(w => w.id === Number(this.id()));
+      this.workshopDetail.set(found);
+    }
+  }
+
+  get detail() {
+    return this.workshopDetail;
+  }
 
   toggleStatus() {
     const workshop = this.detail();

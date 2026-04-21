@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { ITallerCultural } from '../../Domain/Interfaces/ITallerCultural';
 import { RouterLink, Router } from '@angular/router';
 import { TallerService } from '../../Domain/Services/TallerServices';
+import { UserService } from '../../Domain/Services/UsersServices';
 import { NgIf } from '@angular/common';
 import { SafePipe } from '../../Shared/Pipes/safe.pipe';
 import { ChangeDetectorRef } from '@angular/core';
@@ -36,6 +37,7 @@ export class FormularioInscripcionTalleres {
 
   constructor(
     private tallerService: TallerService,
+    private userService: UserService,
     private router: Router,
     private cdr: ChangeDetectorRef,
   ) {}
@@ -75,6 +77,8 @@ export class FormularioInscripcionTalleres {
     };
 
     this.tallerService.addWorkshop(nuevoTaller);
+    this.userService.addWorkshopToCurrentUser(nuevoTaller.id);
+    
     this.router.navigate(['/*']);
   }
 

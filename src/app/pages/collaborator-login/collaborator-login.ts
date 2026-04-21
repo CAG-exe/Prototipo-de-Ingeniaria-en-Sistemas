@@ -29,6 +29,7 @@ export class CollaboratorLogin {
         alert('Tu cuenta está deshabilitada. Contacta al administrador.');
         return;
       }
+      this.userService.setCurrentUser(user);
       alert(`¡Bienvenido, ${user.name}!`);
       this.router.navigate(['/form-inscription-workshops']);
     } else {

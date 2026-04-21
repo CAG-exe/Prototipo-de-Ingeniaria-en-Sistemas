@@ -15,7 +15,7 @@ export const routes: Routes = [
   { path: 'login-collaborator', component: CollaboratorLogin },
   { path: 'register-collaborator', component: CollaboratorRegistrationComponent},
   { path: 'form-inscription-workshops', component: FormularioInscripcionTalleres },
-  // { path: 'workshop/:id', component: WorkshopDetailComponent },
+  { path: 'taller/:id', component: WorkshopDetailComponent },
   { path: 'workshops-manager', component: WorkshopDetailsListComponent },
   { path: 'users-manager', component: UserManagementComponent },
   { path: 'search-results', component: SearchResults },

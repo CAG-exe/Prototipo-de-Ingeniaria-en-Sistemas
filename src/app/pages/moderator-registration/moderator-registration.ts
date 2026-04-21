@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { UserService } from '../../Domain/Services/UsersServices';
 
 @Component({
   selector: 'app-moderator-registration',
@@ -14,16 +15,18 @@ export class ModeratorRegistration {
   email: string = '';
   password: string = '';
   
-  nameModerator: string = 'Bruno' ;
-  emailModerator: string = 'admin@admin.com';
-  passwordModerator: string = 'admin1';
-
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private userService: UserService
+  ) {}
 
   login() {
-    if (this.name === this.nameModerator && 
-        this.email === this.emailModerator && 
-        this.password === this.passwordModerator) {
+    const user = this.userService.users.find(
+      (u) => u.name === this.name && u.email === this.email && u.password === this.password
+    );
+
+    if (user) {
+      this.userService.setCurrentUser(user);
       this.router.navigate(['/users-manager']);
     } else {
       alert('Credenciales incorrectas');
