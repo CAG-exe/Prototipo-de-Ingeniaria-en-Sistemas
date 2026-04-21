@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, signal } from '@angular/core';
+import { RouterLink, Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-screen',
@@ -7,4 +7,18 @@ import { RouterLink } from '@angular/router';
   templateUrl: './main-screen.html',
   styleUrl: './main-screen.css',
 })
-export class MainScreen {}
+export class MainScreen {
+  protected readonly searchTerm = signal('');
+
+  constructor(private router: Router) {}
+
+  protected onSearchInput(event: Event): void {
+    this.searchTerm.set((event.target as HTMLInputElement).value);
+  }
+
+  protected onSearch(): void {
+    this.router.navigate(['/search-results'], {
+      queryParams: { q: this.searchTerm() },
+    });
+  }
+}

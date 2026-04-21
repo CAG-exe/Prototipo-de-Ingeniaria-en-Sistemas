@@ -54,7 +54,8 @@ export class MapComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     const el = this.mapEl().nativeElement;
-    this.map = L.map(el).setView([-34.6037, -58.3816], 11);
+    this.map = L.map(el, { zoomControl: false }).setView([-34.6037, -58.3816], 11);
+    L.control.zoom({ position: 'topright' }).addTo(this.map);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap',
       maxZoom: 19,
