@@ -2,16 +2,18 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  NgZone,
   computed,
   signal,
   viewChild,
 } from '@angular/core';
 import { MapComponent } from '../../components/map/map';
-import { Place } from '../../components/map/map.types';
+import { ITallerCultural, formatDireccion } from '../../Domain/Interfaces/ITallerCultural';
 import { TallerPanel } from '../../components/taller-panel/taller-panel';
+import { SearchOption } from '../search-option/search-option';
 import { TallerService } from '../../Domain/Services/TallerServices';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 
 function normalize(s: string): string {
@@ -21,30 +23,31 @@ function normalize(s: string): string {
 @Component({
   selector: 'app-search-results',
   standalone: true,
-  imports: [MapComponent, TallerPanel],
+  imports: [MapComponent, TallerPanel, RouterLink, SearchOption],
   templateUrl: './search-results.html',
   styleUrl: './search-results.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchResults {
-  protected readonly allPlaces = signal<Place[]>([]);
+  protected readonly allPlaces = signal<ITallerCultural[]>([]);
   protected readonly searchTerm = signal<string>('');
-  protected readonly highlightedPlace = signal<Place | null>(null);
+  protected readonly highlightedPlace = signal<ITallerCultural | null>(null);
   protected readonly panelVisible = signal<boolean>(false);
-  private readonly viewportPlaces = signal<Place[]>([]);
+  private readonly viewportPlaces = signal<ITallerCultural[]>([]);
 
   protected readonly hasQuery = computed(() => this.searchTerm().trim() !== '');
 
-  protected readonly selectedPlaces = computed<Place[]>(() => {
+  protected readonly selectedPlaces = computed<ITallerCultural[]>(() => {
     const terms = normalize(this.searchTerm()).split(/\s+/).filter(Boolean);
     if (!terms.length) return [];
     return this.allPlaces().filter(p => {
-      const haystack = normalize(`${p.nombre} ${p.direccion}`);
+      const dir = p.direccion ? formatDireccion(p.direccion) : '';
+      const haystack = normalize(`${p.nombre} ${dir} ${p.rubro}`);
       return terms.every(t => haystack.includes(t));
     });
   });
 
-  protected readonly otherPlaces = computed<Place[]>(() => {
+  protected readonly otherPlaces = computed<ITallerCultural[]>(() => {
     const selected = new Set(this.hasQuery() ? this.selectedPlaces() : []);
     const highlighted = this.highlightedPlace();
     const others = this.viewportPlaces().filter((p) => !selected.has(p));
@@ -56,7 +59,7 @@ export class SearchResults {
 
   private readonly listEl = viewChild.required<ElementRef<HTMLElement>>('listEl');
 
-  constructor(private tallerService: TallerService, private route: ActivatedRoute, private router: Router) {
+  constructor(private tallerService: TallerService, private route: ActivatedRoute, private router: Router, private zone: NgZone) {
     this.route.queryParamMap.pipe(takeUntilDestroyed()).subscribe((params) => {
       const q = params.get('q') ?? '';
       this.searchTerm.set(q);
@@ -64,21 +67,11 @@ export class SearchResults {
     });
 
     this.tallerService.workshops$.pipe(takeUntilDestroyed()).subscribe((data) => {
-      const places: Place[] = data.map((t) => ({
-        ...t,
-        direccion: t.direccion?.nomenclatura || '',
-        position: t.direccion
-          ? {
-              lat: t.direccion.ubicacion.lat,
-              lng: t.direccion.ubicacion.lon,
-            }
-          : null,
-      }));
-      this.allPlaces.set(places);
+      this.allPlaces.set(data);
     });
   }
 
-  protected onPlacesInViewport(places: Place[]): void {
+  protected onPlacesInViewport(places: ITallerCultural[]): void {
     this.viewportPlaces.set(places);
     this.scrollToHighlighted();
     if (this.highlightedPlace()) this.panelVisible.set(true);
@@ -95,7 +88,7 @@ export class SearchResults {
     });
   }
 
-  protected onPlaceClick(place: Place): void {
+  protected onPlaceClick(place: ITallerCultural): void {
     const next = this.highlightedPlace() === place ? null : place;
     this.highlightedPlace.set(next);
     this.panelVisible.set(false);

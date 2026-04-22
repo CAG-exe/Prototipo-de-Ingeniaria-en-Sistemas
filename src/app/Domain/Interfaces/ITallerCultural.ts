@@ -21,3 +21,7 @@ export interface ITallerCultural {
   habilitado: boolean;
   direccion: IGeorefDireccion | null;
 }
+
+export function formatDireccion(d: IGeorefDireccion): string {
+  return `${d.calle.nombre.replace(/^\d+\s+/, '')} ${d.altura.valor}, ${d.localidad_censal.nombre}, ${d.provincia.nombre}`;
+}

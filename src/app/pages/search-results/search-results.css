@@ -4,6 +4,28 @@
   overflow: hidden;
 }
 
+
+.list-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  border-radius: 9999px;
+  padding: 4px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.back-btn:hover {
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
 .search-container {
   display: flex;
   align-items: center;

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-import { Place } from '../map/map.types';
+import { ITallerCultural, formatDireccion } from '../../Domain/Interfaces/ITallerCultural';
 
 @Component({
   selector: 'app-taller-panel',
@@ -9,6 +9,7 @@ import { Place } from '../map/map.types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TallerPanel {
-  readonly place = input.required<Place>();
+  readonly place = input.required<ITallerCultural>();
   readonly cerrar = output<void>();
+  readonly formatDireccion = formatDireccion;
 }

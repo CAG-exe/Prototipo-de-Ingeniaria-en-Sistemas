@@ -1,141 +1,20 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Búsqueda de Talleres</title>
-  <link rel="stylesheet" href="search-option.css" />
-</head>
-<body>
-    <div class="page-wrapper">
-    <header class="search-header">
-      <div class="search-brand">
-        <span class="brand-name">Búsqueda de Talleres</span>
-      </div>
-      <div class="search-bar-wrapper">
-        <input
-          type="text"
-          id="searchInput"
-          class="search-input"
-          placeholder="Buscar talleres"
-          autocomplete="off"
-        />
-        <button class="search-btn" id="searchBtn" aria-label="Buscar">         
-        </button>
-      </div>
-    </header>
-    <main class="results-section">
-      <div class="results-list" id="resultsList"></div>
-    </main>
- 
+<article
+  class="flex items-center justify-between gap-4 px-4 py-3 bg-white border-b border-slate-200 cursor-pointer hover:bg-slate-50"
+  [class.border-l-4]="selected()"
+  [class.border-l-orange-600]="selected()"
+  [class.bg-orange-50]="selected()"
+  [attr.aria-label]="'Ver detalles de ' + taller().nombre"
+>
+  <div class="flex-1 min-w-0">
+    <h3 class="font-semibold text-slate-900 truncate">{{ taller().nombre }}</h3>
+    <span class="inline-block mb-1 text-xs font-semibold text-orange-600 bg-orange-50 rounded-full px-2 py-0.5">
+      {{ taller().rubro }}
+    </span>
+    @if (taller().atencion) {
+      <p class="text-xs text-slate-500 mt-0.5 truncate">{{ taller().atencion }}</p>
+    }
+    @if (taller().direccion; as dir) {
+      <p class="text-xs text-slate-400 truncate">{{ formatDireccion(dir) }}</p>
+    }
   </div>
- 
-  <script>
-    const talleres = [
-      {
-        id: 1,
-        nombre: "TALLER MECÁNICO EL TANO",
-        horario: "Lun–Vie 8:00–18:00",
-        direccion: "Av. San Martín 1230, José C. Paz",
-        telefono: "+54 11 4658-0011",
-        redes: "Instagram: @momo4propiedades",
-        rubro: "mecánica",
-        fotoUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuA33fgsXAPiy7S6dtZgCR1dMxvmG893Fuxg&s"
-      },
-      {
-        id: 2,
-        nombre: "Electro Automotriz Rodolfo",
-        horario: "Lun–Sáb 9:00–17:00",
-        direccion: "Mitre 450, Malvinas Argentinas",
-        telefono: "+54 11 4667-2233",
-        redes: "X: @electroRodolfinho",
-        rubro: "electricidad",
-        fotoUrl: "https://cequinor.conicet.gov.ar/wp-content/uploads/sites/74/2023/09/Electricidad1.jpg"
-      },
-      {
-        id: 3,
-        nombre: "ChapaColor",
-        horario: "Lun–Vie 8:30–17:30",
-        direccion: "Sarmiento 780, Grand Bourg",
-        telefono: "+54 11 4665-8877",
-        redes: "TikTok: @Chapita_GrandBourg01",
-        rubro: "chapa y pintura",
-        fotoUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMrsNq7J8tAlt6GYh05LcYdcGp-YMUxho6sA&s"
-      },
-      {
-        id: 4,
-        nombre: "Gomería El Gomero",
-        horario: "Todos los días 8:00–20:00",
-        direccion: "Ruta 197 km 3, Del Viso",
-        telefono: "+54 11 4728-5544",
-        redes: "Reddit: @GomeroDeDelViso",
-        rubro: "gomería",
-        fotoUrl: "https://maktools.com.ar/imagenes/novedades/hf-45_391455.jpg"
-      },
-      {
-        id: 5,
-        nombre: "AireCar",
-        horario: "Lun–Sáb 9:00–18:00",
-        direccion: "Belgrano 112, Tortuguitas",
-        telefono: "+54 11 4732-6600",
-        redes: "Facebook: @aire_arg",
-        rubro: "aire acondicionado",
-        fotoUrl:"https://tecnomaxequip.com.ar/wp-content/uploads/2018/05/aire-acondicionado-autos-g.png"
-      },
-    ];
-
- 
-function renderCard(taller, index) {
-      const fotoContent = taller.fotoUrl
-        ? `<img src="${taller.fotoUrl}" alt="Foto de ${taller.nombre}" loading="lazy" />`
-        : `<span class="photo-placeholder">Foto</span>`;
- 
-      return `
-        <article
-          class="taller-card"
-          data-id="${taller.id}"
-          role="button"
-          tabindex="0"
-          aria-label="Ver detalles de ${taller.nombre}"
-          style="animation-delay:${index * 60}ms"
-        >
-          <div class="card-info">
-            <h2 class="card-name">${taller.nombre}</h2>
-            <div class="card-meta">
-              <span class="card-meta-separator" aria-hidden="true"></span>
-              <span class="card-meta-item">${taller.horario}</span>
-              <span class="card-meta-separator" aria-hidden="true"></span>
-              <span class="card-meta-item">${taller.direccion}</span>
-            </div>
-            <div class="card-meta">
-              <span class="card-meta-separator" aria-hidden="true"></span>
-              <span class="card-meta-item">${taller.telefono}</span>
-              <span class="card-meta-separator" aria-hidden="true"></span>
-              <span class="card-meta-item">${taller.redes}</span>
-            </div>
-            <span class="card-rubro">${taller.rubro}</span>
-          </div>
-          <div class="card-photo" aria-hidden="true">${fotoContent}</div>
-        </article>
-      `;
-    }
- 
-function renderResultados() {
-      const resultados = talleres; 
-      const lista      = document.getElementById("resultsList");
- 
-      if (resultados.length === 0) {
-        lista.innerHTML = "";
-      } else {
-        const plural = resultados.length !== 1;
-        lista.innerHTML = resultados.map((t, i) => renderCard(t, i)).join("");
-        bindCardEvents();
-      }
-    }
- 
-document.addEventListener("DOMContentLoaded", () => {
-      renderResultados();
-    });
-  </script>
-</body>
-</html>
+</article>

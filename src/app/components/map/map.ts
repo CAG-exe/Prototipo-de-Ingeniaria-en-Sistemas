@@ -10,7 +10,8 @@ import {
   viewChild,
 } from '@angular/core';
 import * as L from 'leaflet';
-import { Place } from './map.types';
+import { ITallerCultural } from '../../Domain/Interfaces/ITallerCultural';
+type Place = ITallerCultural;
 
 @Component({
   selector: 'app-map',
@@ -84,8 +85,8 @@ export class MapComponent implements AfterViewInit, OnDestroy {
     const bounds = L.latLngBounds([]);
 
     for (const place of places) {
-      if (!place.position || !this.map) continue;
-      const pos: [number, number] = [place.position.lat, place.position.lng];
+      if (!place.direccion || !this.map) continue;
+      const pos: [number, number] = [place.direccion.ubicacion.lat, place.direccion.ubicacion.lon];
       const marker = L.marker(pos, { icon: icon(state(place, selected, highlighted)) }).addTo(this.map);
       marker.on('click', () => this.placeClicked.emit(place));
       this.markers.set(place, marker);
