@@ -26,6 +26,8 @@
 !.vscode/extensions.json
 !.vscode/mcp.json
 .history/*
+.mcp.json
+.cp-images/
 
 # misc
 /.sass-cache
@@ -69,6 +71,3 @@ lerna-debug.log*
 .next/
 out/
 build/
-
-# MCP
-.mcp.json

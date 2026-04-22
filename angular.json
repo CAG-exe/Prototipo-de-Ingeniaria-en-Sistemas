@@ -23,6 +23,16 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "workshop.json",
+                "input": "src/app/Data",
+                "output": "/"
+              },
+              {
+                "glob": "users.json",
+                "input": "src/app/Data",
+                "output": "/"
               }
             ],
             "styles": [

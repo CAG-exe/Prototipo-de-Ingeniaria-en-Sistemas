@@ -1,5 +1,6 @@
 import { Component, OnInit, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { IUser } from '../../Domain/Interfaces/IUser';
 import { UserService } from '../../Domain/Services/UsersServices';
 
@@ -7,7 +8,7 @@ import { UserService } from '../../Domain/Services/UsersServices';
   standalone: true,
   selector: 'app-user-item',
   templateUrl: './UserItem.component.html',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
 })
 export class UserItemComponent implements OnInit {
   readonly user = input<IUser>();

@@ -10,7 +10,8 @@ import {
   viewChild,
 } from '@angular/core';
 import * as L from 'leaflet';
-import { Place } from './map.types';
+import { ITallerCultural } from '../../Domain/Interfaces/ITallerCultural';
+type Place = ITallerCultural;
 
 @Component({
   selector: 'app-map',
@@ -54,7 +55,8 @@ export class MapComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     const el = this.mapEl().nativeElement;
-    this.map = L.map(el).setView([-34.6037, -58.3816], 11);
+    this.map = L.map(el, { zoomControl: false }).setView([-34.6037, -58.3816], 11);
+    L.control.zoom({ position: 'topright' }).addTo(this.map);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap',
       maxZoom: 19,
@@ -83,8 +85,8 @@ export class MapComponent implements AfterViewInit, OnDestroy {
     const bounds = L.latLngBounds([]);
 
     for (const place of places) {
-      if (!place.position || !this.map) continue;
-      const pos: [number, number] = [place.position.lat, place.position.lng];
+      if (!place.direccion || !this.map) continue;
+      const pos: [number, number] = [place.direccion.ubicacion.lat, place.direccion.ubicacion.lon];
       const marker = L.marker(pos, { icon: icon(state(place, selected, highlighted)) }).addTo(this.map);
       marker.on('click', () => this.placeClicked.emit(place));
       this.markers.set(place, marker);

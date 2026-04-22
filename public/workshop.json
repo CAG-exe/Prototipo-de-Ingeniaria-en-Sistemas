@@ -1,0 +1,802 @@
+[
+  {
+    "id": 1,
+    "nombre": "Taller Cultural Raíces del Norte",
+    "imagen": "https://images.unsplash.com/photo-1511192336575-5a79af67a629",
+    "rubro": "Folklore y danzas",
+    "telefono": "1132458891",
+    "email": "raicesnorte@gmail.com",
+    "atencion": "Lunes a Viernes de 18:30hs a 20:00hs",
+    "descripcion": "Espacio dedicado a preservar danzas folklóricas argentinas para todas las edades.",
+    "habilitado": true,
+    "redesSociales": "Instagram/raicesdelnorte",
+    "direccion": {
+      "nomenclatura": "AV PRESIDENTE PERON 2100, Ituzaingó, Buenos Aires",
+      "calle": {
+        "categoria": "AV",
+        "id": "0641001000180",
+        "nombre": "AV PRESIDENTE PERON"
+      },
+      "altura": {
+        "unidad": null,
+        "valor": 2100
+      },
+      "localidad_censal": {
+        "id": "06410010",
+        "nombre": "Ituzaingo"
+      },
+      "departamento": {
+        "id": "06410",
+        "nombre": "Ituzaingó"
+      },
+      "provincia": {
+        "id": "06",
+        "nombre": "Buenos Aires"
+      },
+      "ubicacion": {
+        "lat": -34.627878011254566,
+        "lon": -58.70011649800686
+      }
+    }
+  },
+  {
+    "id": 2,
+    "nombre": "Espacio Arte Urbano Nogués",
+    "imagen": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
+    "rubro": "Muralismo y graffiti",
+    "telefono": "1165538890",
+    "email": "arteurbano@gmail.com",
+    "atencion": "Martes y Jueves de 17:00hs a 19:00hs",
+    "descripcion": "Taller de muralismo, graffiti y arte callejero para jóvenes.",
+    "habilitado": false,
+    "redesSociales": "Instagram/arteurbano_nogues",
+    "direccion": {
+      "nomenclatura": "1112 BATALLA DE MAIPU 950, Malvinas Argentinas, Buenos Aires",
+      "calle": {
+        "categoria": "CALLE",
+        "id": "0651501000290",
+        "nombre": "1112 BATALLA DE MAIPU"
+      },
+      "altura": {
+        "unidad": null,
+        "valor": 950
+      },
+      "localidad_censal": {
+        "id": "06515010",
+        "nombre": "Malvinas Argentinas"
+      },
+      "departamento": {
+        "id": "06515",
+        "nombre": "Malvinas Argentinas"
+      },
+      "provincia": {
+        "id": "06",
+        "nombre": "Buenos Aires"
+      },
+      "ubicacion": {
+        "lat": -34.49483488166774,
+        "lon": -58.727436824046784
+      }
+    }
+  },
+  {
+    "id": 3,
+    "nombre": "Casa de Música Grand Bourg",
+    "imagen": "https://images.unsplash.com/photo-1511379938547-c1f69419868d",
+    "rubro": "Clases de guitarra y piano",
+    "telefono": "1178890021",
+    "email": "casamusica@gmail.com",
+    "atencion": "Miércoles de 19:00hs a 21:00hs",
+    "descripcion": "Clases iniciales y avanzadas de guitarra, piano y teoría musical.",
+    "habilitado": false,
+    "redesSociales": "Instagram/casamusica.gb",
+    "direccion": {
+      "nomenclatura": "1136 JOSE HERNANDEZ 1340, Malvinas Argentinas, Buenos Aires",
+      "calle": {
+        "categoria": "CALLE",
+        "id": "0651501000350",
+        "nombre": "1136 JOSE HERNANDEZ"
+      },
+      "altura": {
+        "unidad": null,
+        "valor": 1340
+      },
+      "localidad_censal": {
+        "id": "06515010",
+        "nombre": "Malvinas Argentinas"
+      },
+      "departamento": {
+        "id": "06515",
+        "nombre": "Malvinas Argentinas"
+      },
+      "provincia": {
+        "id": "06",
+        "nombre": "Buenos Aires"
+      },
+      "ubicacion": {
+        "lat": -34.49665382112803,
+        "lon": -58.74086440786997
+      }
+    }
+  },
+  {
+    "id": 4,
+    "nombre": "Laboratorio Teatral Zona Norte",
+    "imagen": "https://images.unsplash.com/photo-1503095396549-807759245b35",
+    "rubro": "Teatro",
+    "telefono": "1133448899",
+    "email": "labteatral@gmail.com",
+    "atencion": "Jueves de 18:00hs a 20:30hs",
+    "descripcion": "Entrenamiento actoral, improvisación y puesta en escena.",
+    "habilitado": true,
+    "redesSociales": "Facebook/Laboratorio Teatral Zona Norte",
+    "direccion": {
+      "nomenclatura": "COMOD RIVADAVIA 420, Tigre, Buenos Aires",
+      "calle": {
+        "categoria": "CALLE",
+        "id": "0680501002740",
+        "nombre": "COMOD RIVADAVIA"
+      },
+      "altura": {
+        "unidad": null,
+        "valor": 420
+      },
+      "localidad_censal": {
+        "id": "06805010",
+        "nombre": "Tigre"
+      },
+      "departamento": {
+        "id": "06805",
+        "nombre": "Tigre"
+      },
+      "provincia": {
+        "id": "06",
+        "nombre": "Buenos Aires"
+      },
+      "ubicacion": {
+        "lat": -34.45852911058313,
+        "lon": -58.6442414506941
+      }
+    }
+  },
+  {
+    "id": 5,
+    "nombre": "Taller Cerámica Tierra Viva",
+    "imagen": "https://images.unsplash.com/photo-1517685352821-92cf88aee5a5",
+    "rubro": "Cerámica",
+    "telefono": "1142217788",
+    "email": "tierraviva@gmail.com",
+    "atencion": "Viernes de 16:30hs a 19:00hs",
+    "descripcion": "Modelado y esmaltado de piezas en cerámica artesanal.",
+    "habilitado": true,
+    "redesSociales": "Instagram/tierra.viva.ceramica",
+    "direccion": {
+      "nomenclatura": "2191 GRL SAN MARTIN 780, Malvinas Argentinas, Buenos Aires",
+      "calle": {
+        "categoria": "CALLE",
+        "id": "0651501001350",
+        "nombre": "2191 GRL SAN MARTIN"
+      },
+      "altura": {
+        "unidad": null,
+        "valor": 780
+      },
+      "localidad_censal": {
+        "id": "06515010",
+        "nombre": "Malvinas Argentinas"
+      },
+      "departamento": {
+        "id": "06515",
+        "nombre": "Malvinas Argentinas"
+      },
+      "provincia": {
+        "id": "06",
+        "nombre": "Buenos Aires"
+      },
+      "ubicacion": {
+        "lat": -34.503573906065796,
+        "lon": -58.70084420615943
+      }
+    }
+  },
+  {
+    "id": 6,
+    "nombre": "Escuela de Fotografía Flash Norte",
+    "imagen": "https://images.unsplash.com/photo-1492724441997-5dc865305da7",
+    "rubro": "Fotografía",
+    "telefono": "1160023344",
+    "email": "flashnorte@gmail.com",
+    "atencion": "Sábados de 10:00hs a 13:00hs",
+    "descripcion": "Fotografía digital, iluminación y edición.",
+    "habilitado": false,
+    "redesSociales": "Instagram/flashnorte",
+    "direccion": {
+      "nomenclatura": "1321 FRAY LUIS BELTRAN 1220, Malvinas Argentinas, Buenos Aires",
+      "calle": {
+        "categoria": "CALLE",
+        "id": "0651501000550",
+        "nombre": "1321 FRAY LUIS BELTRAN"
+      },
+      "altura": {
+        "unidad": null,
+        "valor": 1220
+      },
+      "localidad_censal": {
+        "id": "06515010",
+        "nombre": "Malvinas Argentinas"
+      },
+      "departamento": {
+        "id": "06515",
+        "nombre": "Malvinas Argentinas"
+      },
+      "provincia": {
+        "id": "06",
+        "nombre": "Buenos Aires"
+      },
+      "ubicacion": {
+        "lat": -34.48346661533306,
+        "lon": -58.7324572895309
+      }
+    }
+  },
+  {
+    "id": 7,
+    "nombre": "Espacio Danza Libre",
+    "imagen": "https://images.unsplash.com/photo-1504609813442-a8924e83f76e",
+    "rubro": "Danza contemporánea",
+    "telefono": "1188877766",
+    "email": "danzalibre@gmail.com",
+    "atencion": "Lunes y Miércoles de 20:00hs a 21:30hs",
+    "descripcion": "Expresión corporal y danza contemporánea.",
+    "habilitado": true,
+    "redesSociales": "Instagram/danzalibre",
+    "direccion": {
+      "nomenclatura": "GRL BARTOLOME MITRE 540, Tigre, Buenos Aires",
+      "calle": {
+        "categoria": "CALLE",
+        "id": "0680501003550",
+        "nombre": "GRL BARTOLOME MITRE"
+      },
+      "altura": {
+        "unidad": null,
+        "valor": 540
+      },
+      "localidad_censal": {
+        "id": "06805010",
+        "nombre": "Tigre"
+      },
+      "departamento": {
+        "id": "06805",
+        "nombre": "Tigre"
+      },
+      "provincia": {
+        "id": "06",
+        "nombre": "Buenos Aires"
+      },
+      "ubicacion": {
+        "lat": -34.486452097222006,
+        "lon": -58.639747492185116
+      }
+    }
+  },
+  {
+    "id": 8,
+    "nombre": "Club de Lectura El Andén",
+    "imagen": "https://images.unsplash.com/photo-1519681393784-d120267933ba",
+    "rubro": "Literatura",
+    "telefono": "1154432211",
+    "email": "elanden@gmail.com",
+    "atencion": "Miércoles de 19:30hs a 21:00hs",
+    "descripcion": "Encuentros de lectura y debate literario.",
+    "habilitado": true,
+    "redesSociales": "Facebook/Club El Andén",
+    "direccion": {
+      "nomenclatura": "1114 PASO DE LOS ANDES 310, Malvinas Argentinas, Buenos Aires",
+      "calle": {
+        "categoria": "CALLE",
+        "id": "0651501000295",
+        "nombre": "1114 PASO DE LOS ANDES"
+      },
+      "altura": {
+        "unidad": null,
+        "valor": 310
+      },
+      "localidad_censal": {
+        "id": "06515010",
+        "nombre": "Malvinas Argentinas"
+      },
+      "departamento": {
+        "id": "06515",
+        "nombre": "Malvinas Argentinas"
+      },
+      "provincia": {
+        "id": "06",
+        "nombre": "Buenos Aires"
+      },
+      "ubicacion": {
+        "lat": -34.50180090515227,
+        "lon": -58.72341056282218
+      }
+    }
+  },
+  {
+    "id": 9,
+    "nombre": "Taller de Escultura Norte",
+    "imagen": "https://images.unsplash.com/photo-1513364776144-60967b0f800f",
+    "rubro": "Escultura",
+    "telefono": "1130098877",
+    "email": "esculturanorte@gmail.com",
+    "atencion": "Jueves de 17:30hs a 19:30hs",
+    "descripcion": "Escultura en madera, yeso y materiales reciclados.",
+    "habilitado": false,
+    "redesSociales": "Instagram/escultura.norte",
+    "direccion": {
+      "nomenclatura": "4152 GRAL URQUIZA 1670, San Miguel, Buenos Aires",
+      "calle": {
+        "categoria": "CALLE",
+        "id": "0676001000775",
+        "nombre": "4152 GRAL URQUIZA"
+      },
+      "altura": {
+        "unidad": null,
+        "valor": 1670
+      },
+      "localidad_censal": {
+        "id": "06760010",
+        "nombre": "San Miguel"
+      },
+      "departamento": {
+        "id": "06760",
+        "nombre": "San Miguel"
+      },
+      "provincia": {
+        "id": "06",
+        "nombre": "Buenos Aires"
+      },
+      "ubicacion": {
+        "lat": -34.538042343622905,
+        "lon": -58.70832014197135
+      }
+    }
+  },
+  {
+    "id": 10,
+    "nombre": "Centro Cultural Puertas Abiertas",
+    "imagen": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97",
+    "rubro": "Pintura",
+    "telefono": "1199987766",
+    "email": "puertasabiertas@gmail.com",
+    "atencion": "Viernes de 18:00hs a 20:30hs",
+    "descripcion": "Clases de pintura acrílica y óleo para principiantes.",
+    "habilitado": true,
+    "redesSociales": "Instagram/puertasabiertas.cc",
+    "direccion": {
+      "nomenclatura": "2231 CAP SARMIENTO 600, Malvinas Argentinas, Buenos Aires",
+      "calle": {
+        "categoria": "CALLE",
+        "id": "0651501001455",
+        "nombre": "2231 CAP SARMIENTO"
+      },
+      "altura": {
+        "unidad": null,
+        "valor": 600
+      },
+      "localidad_censal": {
+        "id": "06515010",
+        "nombre": "Malvinas Argentinas"
+      },
+      "departamento": {
+        "id": "06515",
+        "nombre": "Malvinas Argentinas"
+      },
+      "provincia": {
+        "id": "06",
+        "nombre": "Buenos Aires"
+      },
+      "ubicacion": {
+        "lat": -34.48786615212738,
+        "lon": -58.69094047582115
+      }
+    }
+  },
+  {
+    "id": 11,
+    "nombre": "Taller de Tango Porteño",
+    "imagen": "https://images.unsplash.com/photo-1504609813442-a8924e83f76e",
+    "rubro": "Tango y milonga",
+    "telefono": "1145678901",
+    "email": "tangoporteno@gmail.com",
+    "atencion": "Martes y Jueves de 20:00hs a 22:00hs",
+    "descripcion": "Clases de tango para todos los niveles en el corazón de Buenos Aires.",
+    "habilitado": true,
+    "redesSociales": "Instagram/tangoporteno_ba",
+    "direccion": {
+      "nomenclatura": "AV CORRIENTES 2500, Comuna 3, Ciudad Autónoma de Buenos Aires",
+      "calle": {
+        "categoria": "AV",
+        "id": "0202101001185",
+        "nombre": "AV CORRIENTES"
+      },
+      "altura": {
+        "unidad": null,
+        "valor": 2500
+      },
+      "localidad_censal": {
+        "id": "02000010",
+        "nombre": "Ciudad Autónoma de Buenos Aires"
+      },
+      "departamento": {
+        "id": "02021",
+        "nombre": "Comuna 3"
+      },
+      "provincia": {
+        "id": "02",
+        "nombre": "Ciudad Autónoma de Buenos Aires"
+      },
+      "ubicacion": {
+        "lat": -34.6047137500375,
+        "lon": -58.402137170712
+      }
+    }
+  },
+  {
+    "id": 12,
+    "nombre": "Estudio de Pintura Boedo",
+    "imagen": "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b",
+    "rubro": "Pintura y acuarela",
+    "telefono": "1156789012",
+    "email": "pinturaboedo@gmail.com",
+    "atencion": "Lunes y Miércoles de 18:00hs a 20:00hs",
+    "descripcion": "Técnicas de pintura acrílica, óleo y acuarela en un espacio íntimo.",
+    "habilitado": true,
+    "redesSociales": "Instagram/estudio.boedo",
+    "direccion": {
+      "nomenclatura": "AV RIVADAVIA 4200, Comuna 5, Ciudad Autónoma de Buenos Aires",
+      "calle": {
+        "categoria": "AV",
+        "id": "0203501001695",
+        "nombre": "AV RIVADAVIA"
+      },
+      "altura": {
+        "unidad": null,
+        "valor": 4200
+      },
+      "localidad_censal": {
+        "id": "02000010",
+        "nombre": "Ciudad Autónoma de Buenos Aires"
+      },
+      "departamento": {
+        "id": "02035",
+        "nombre": "Comuna 5"
+      },
+      "provincia": {
+        "id": "02",
+        "nombre": "Ciudad Autónoma de Buenos Aires"
+      },
+      "ubicacion": {
+        "lat": -34.6131975279536,
+        "lon": -58.4249384626067
+      }
+    }
+  },
+  {
+    "id": 13,
+    "nombre": "Club de Canto Quilmes",
+    "imagen": "https://images.unsplash.com/photo-1511379938547-c1f69419868d",
+    "rubro": "Canto y técnica vocal",
+    "telefono": "1167890123",
+    "email": "cantoquilmes@gmail.com",
+    "atencion": "Sábados de 10:00hs a 13:00hs",
+    "descripcion": "Canto lírico, popular y técnica vocal para todas las edades.",
+    "habilitado": true,
+    "redesSociales": "Facebook/ClubCantedQuilmes",
+    "direccion": {
+      "nomenclatura": "828 SAN MARTIN 850, Quilmes, Buenos Aires",
+      "calle": {
+        "categoria": "CALLE",
+        "id": "0665801002085",
+        "nombre": "828 SAN MARTIN"
+      },
+      "altura": {
+        "unidad": null,
+        "valor": 850
+      },
+      "localidad_censal": {
+        "id": "06658010",
+        "nombre": "Quilmes"
+      },
+      "departamento": {
+        "id": "06658",
+        "nombre": "Quilmes"
+      },
+      "provincia": {
+        "id": "06",
+        "nombre": "Buenos Aires"
+      },
+      "ubicacion": {
+        "lat": -34.75942299099869,
+        "lon": -58.29866781547631
+      }
+    }
+  },
+  {
+    "id": 14,
+    "nombre": "Espacio Creativo Lanús",
+    "imagen": "https://images.unsplash.com/photo-1513364776144-60967b0f800f",
+    "rubro": "Artesanías",
+    "telefono": "1178901234",
+    "email": "creativolanus@gmail.com",
+    "atencion": "Viernes de 17:00hs a 19:30hs",
+    "descripcion": "Taller de artesanías en cuero, madera y textiles.",
+    "habilitado": false,
+    "redesSociales": "Instagram/creativolanus",
+    "direccion": {
+      "nomenclatura": "R DE ESCALADA DE SAN MARTIN 1100, Lanús, Buenos Aires",
+      "calle": {
+        "categoria": "CALLE",
+        "id": "0643401002275",
+        "nombre": "R DE ESCALADA DE SAN MARTIN"
+      },
+      "altura": {
+        "unidad": null,
+        "valor": 1100
+      },
+      "localidad_censal": {
+        "id": "06434010",
+        "nombre": "Lanus"
+      },
+      "departamento": {
+        "id": "06434",
+        "nombre": "Lanús"
+      },
+      "provincia": {
+        "id": "06",
+        "nombre": "Buenos Aires"
+      },
+      "ubicacion": {
+        "lat": -34.68699181947048,
+        "lon": -58.396648552234886
+      }
+    }
+  },
+  {
+    "id": 15,
+    "nombre": "Taller de Murga Avellaneda",
+    "imagen": "https://images.unsplash.com/photo-1519681393784-d120267933ba",
+    "rubro": "Murga y percusión",
+    "telefono": "1189012345",
+    "email": "murgaave@gmail.com",
+    "atencion": "Domingos de 15:00hs a 18:00hs",
+    "descripcion": "Percusión, vestuario y baile de murga para jóvenes y adultos.",
+    "habilitado": true,
+    "redesSociales": "Facebook/MurgaAvellaneda",
+    "direccion": {
+      "nomenclatura": "MANUEL BELGRANO 700, Avellaneda, Buenos Aires",
+      "calle": {
+        "categoria": "CALLE",
+        "id": "0603501002595",
+        "nombre": "MANUEL BELGRANO"
+      },
+      "altura": {
+        "unidad": null,
+        "valor": 700
+      },
+      "localidad_censal": {
+        "id": "06035010",
+        "nombre": "Avellaneda"
+      },
+      "departamento": {
+        "id": "06035",
+        "nombre": "Avellaneda"
+      },
+      "provincia": {
+        "id": "06",
+        "nombre": "Buenos Aires"
+      },
+      "ubicacion": {
+        "lat": -34.6633322040271,
+        "lon": -58.367022902467
+      }
+    }
+  },
+  {
+    "id": 16,
+    "nombre": "Centro de Artes Visuales La Matanza",
+    "imagen": "https://images.unsplash.com/photo-1492724441997-5dc865305da7",
+    "rubro": "Artes visuales",
+    "telefono": "1190123456",
+    "email": "arteslamatanza@gmail.com",
+    "atencion": "Martes de 19:00hs a 21:00hs",
+    "descripcion": "Fotografía, video arte e instalaciones visuales.",
+    "habilitado": false,
+    "redesSociales": "Instagram/artesvisuales.lm",
+    "direccion": {
+      "nomenclatura": "AV GRL SAN MARTIN 3200, La Matanza, Buenos Aires",
+      "calle": {
+        "categoria": "AV",
+        "id": "0642701000820",
+        "nombre": "AV GRL SAN MARTIN"
+      },
+      "altura": {
+        "unidad": null,
+        "valor": 3200
+      },
+      "localidad_censal": {
+        "id": "06427010",
+        "nombre": "La Matanza"
+      },
+      "departamento": {
+        "id": "06427",
+        "nombre": "La Matanza"
+      },
+      "provincia": {
+        "id": "06",
+        "nombre": "Buenos Aires"
+      },
+      "ubicacion": {
+        "lat": -34.66668181739458,
+        "lon": -58.53629040163966
+      }
+    }
+  },
+  {
+    "id": 17,
+    "nombre": "Escuela de Circo Merlo",
+    "imagen": "https://images.unsplash.com/photo-1503095396549-807759245b35",
+    "rubro": "Circo y acrobacia",
+    "telefono": "1101234567",
+    "email": "circoamerlo@gmail.com",
+    "atencion": "Miércoles y Viernes de 18:00hs a 20:00hs",
+    "descripcion": "Malabares, acrobacia y trapecio para niños y adultos.",
+    "habilitado": true,
+    "redesSociales": "Instagram/circo.merlo",
+    "direccion": {
+      "nomenclatura": "AV EVA PERON 900, Merlo, Buenos Aires",
+      "calle": {
+        "categoria": "AV",
+        "id": "0653901000635",
+        "nombre": "AV EVA PERON"
+      },
+      "altura": {
+        "unidad": null,
+        "valor": 900
+      },
+      "localidad_censal": {
+        "id": "06539010",
+        "nombre": "Merlo"
+      },
+      "departamento": {
+        "id": "06539",
+        "nombre": "Merlo"
+      },
+      "provincia": {
+        "id": "06",
+        "nombre": "Buenos Aires"
+      },
+      "ubicacion": {
+        "lat": -34.6859628644813,
+        "lon": -58.6847046770796
+      }
+    }
+  },
+  {
+    "id": 18,
+    "nombre": "Taller Literario Morón",
+    "imagen": "https://images.unsplash.com/photo-1517685352821-92cf88aee5a5",
+    "rubro": "Escritura creativa",
+    "telefono": "1112345678",
+    "email": "literaturimoron@gmail.com",
+    "atencion": "Jueves de 19:30hs a 21:30hs",
+    "descripcion": "Escritura creativa, poesía y narrativa breve.",
+    "habilitado": true,
+    "redesSociales": "Instagram/taller.literario.moron",
+    "direccion": {
+      "nomenclatura": "MARIANO MORENO 1400, Morón, Buenos Aires",
+      "calle": {
+        "categoria": "CALLE",
+        "id": "0656801002570",
+        "nombre": "MARIANO MORENO"
+      },
+      "altura": {
+        "unidad": null,
+        "valor": 1400
+      },
+      "localidad_censal": {
+        "id": "06568010",
+        "nombre": "Morón"
+      },
+      "departamento": {
+        "id": "06568",
+        "nombre": "Morón"
+      },
+      "provincia": {
+        "id": "06",
+        "nombre": "Buenos Aires"
+      },
+      "ubicacion": {
+        "lat": -34.6584205240906,
+        "lon": -58.6277198554464
+      }
+    }
+  },
+  {
+    "id": 19,
+    "nombre": "Taller de Jazz San Isidro",
+    "imagen": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
+    "rubro": "Jazz e improvisación",
+    "telefono": "1123456789",
+    "email": "jazzsanisidro@gmail.com",
+    "atencion": "Lunes de 20:00hs a 22:00hs",
+    "descripcion": "Improvisación y teoría del jazz para músicos de nivel intermedio.",
+    "habilitado": false,
+    "redesSociales": "Instagram/jazz.sanisidro",
+    "direccion": {
+      "nomenclatura": "BALCARCE 1500, San Isidro, Buenos Aires",
+      "calle": {
+        "categoria": "CALLE",
+        "id": "0675601000195",
+        "nombre": "BALCARCE"
+      },
+      "altura": {
+        "unidad": null,
+        "valor": 1500
+      },
+      "localidad_censal": {
+        "id": "06756010",
+        "nombre": "San Isidro"
+      },
+      "departamento": {
+        "id": "06756",
+        "nombre": "San Isidro"
+      },
+      "provincia": {
+        "id": "06",
+        "nombre": "Buenos Aires"
+      },
+      "ubicacion": {
+        "lat": -34.4807915028018,
+        "lon": -58.4931177192196
+      }
+    }
+  },
+  {
+    "id": 20,
+    "nombre": "Estudio de Danza Hurlingham",
+    "imagen": "https://images.unsplash.com/photo-1511192336575-5a79af67a629",
+    "rubro": "Danza clásica y moderna",
+    "telefono": "1134567890",
+    "email": "danzahurlingham@gmail.com",
+    "atencion": "Martes y Jueves de 17:00hs a 19:00hs",
+    "descripcion": "Ballet clásico, jazz dance y danza moderna para todas las edades.",
+    "habilitado": true,
+    "redesSociales": "Instagram/danza.hurlingham",
+    "direccion": {
+      "nomenclatura": "ACASSUSO 600, Hurlingham, Buenos Aires",
+      "calle": {
+        "categoria": "CALLE",
+        "id": "0640801000035",
+        "nombre": "ACASSUSO"
+      },
+      "altura": {
+        "unidad": null,
+        "valor": 600
+      },
+      "localidad_censal": {
+        "id": "06408010",
+        "nombre": "Hurlingham"
+      },
+      "departamento": {
+        "id": "06408",
+        "nombre": "Hurlingham"
+      },
+      "provincia": {
+        "id": "06",
+        "nombre": "Buenos Aires"
+      },
+      "ubicacion": {
+        "lat": -34.5930890441684,
+        "lon": -58.6436621538385
+      }
+    }
+  }
+]

@@ -32,9 +32,13 @@
       <div *ngIf="user()?.workshops?.length" class="mt-2 text-[12px]">
         <span class="font-semibold text-slate-500 block mb-1">IDs de Talleres:</span>
         <div class="flex flex-wrap gap-1">
-          <span *ngFor="let workshopId of user()?.workshops" class="px-2 py-0.5 bg-slate-100 text-slate-600 rounded-md border border-slate-200">
+          <a 
+            *ngFor="let workshopId of user()?.workshops" 
+            [routerLink]="['/taller', workshopId]"
+            class="px-2 py-0.5 bg-slate-100 text-slate-600 rounded-md border border-slate-200 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-colors cursor-pointer"
+          >
             #{{ workshopId }}
-          </span>
+          </a>
         </div>
       </div>
 

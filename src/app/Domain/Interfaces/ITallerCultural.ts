@@ -1,21 +1,11 @@
-export interface ICoordenadas {
-  srid: number;
-  x: number;
-  y: number;
-}
-
-export interface IDireccionNormalizada {
-  altura: number;
-  cod_calle: number;
-  cod_calle_cruce?: number | null;
-  cod_partido: string;
-  coordenadas: ICoordenadas;
-  direccion: string;
-  nombre_calle: string;
-  nombre_calle_cruce?: string;
-  nombre_localidad: string;
-  nombre_partido: string;
-  tipo: string;
+export interface IGeorefDireccion {
+  nomenclatura: string;
+  calle: { id: string; nombre: string; categoria: string };
+  altura: { valor: number; unidad: string | null };
+  localidad_censal: { id: string; nombre: string };
+  departamento: { id: string; nombre: string };
+  provincia: { id: string; nombre: string };
+  ubicacion: { lat: number; lon: number };
 }
 
 export interface ITallerCultural {
@@ -29,5 +19,9 @@ export interface ITallerCultural {
   redesSociales: string;
   descripcion: string;
   habilitado: boolean;
-  direccionesNormalizadas: IDireccionNormalizada[];
+  direccion: IGeorefDireccion | null;
+}
+
+export function formatDireccion(d: IGeorefDireccion): string {
+  return `${d.calle.nombre.replace(/^\d+\s+/, '')} ${d.altura.valor}, ${d.localidad_censal.nombre}, ${d.provincia.nombre}`;
 }
