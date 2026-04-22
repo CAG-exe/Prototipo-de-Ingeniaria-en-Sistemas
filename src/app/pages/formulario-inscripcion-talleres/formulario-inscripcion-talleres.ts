@@ -24,10 +24,22 @@ export class FormularioInscripcionTalleres {
 
   direccionQuery: string = '';
   sugerencias: IGeorefDireccion[] = [];
-  direccionSeleccionada: IGeorefDireccion | null = null;
   buscandoDireccion: boolean = false;
   mostrarSugerencias: boolean = false;
   sinResultados: boolean = false;
+
+  direccionSeleccionada: IGeorefDireccion | null = null;
+
+
+  private readonly DIRECCION_CENTRO_CULTURAL_DEFAULT: IGeorefDireccion = {
+    nomenclatura: 'JUAN MARIA GUTIERREZ 1150, MALVINAS ARGENTINAS, BUENOS AIRES',
+    calle: { id: '0651501000850', nombre: 'JUAN MARIA GUTIERREZ', categoria: 'CALLE' },
+    altura: { valor: 1150, unidad: null },
+    localidad_censal: { id: '06515010', nombre: 'LOS POLVORINES' },
+    departamento: { id: '06515', nombre: 'MALVINAS ARGENTINAS' },
+    provincia: { id: '06', nombre: 'BUENOS AIRES' },
+    ubicacion: { lat: -34.5222, lon: -58.7000 }
+  };
 
   private debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -66,7 +78,7 @@ export class FormularioInscripcionTalleres {
       descripcion: this.descripcion || '',
       habilitado: false,
       redesSociales: this.tieneRedSocial ? this.redSocial + '/' + this.nickname : '',
-      direccion: this.esCentroCultural ? null : (this.direccionSeleccionada ?? null),
+      direccion: this.direccionSeleccionada,
     };
 
     this.tallerService.addWorkshop(nuevoTaller);
@@ -77,11 +89,14 @@ export class FormularioInscripcionTalleres {
 
   clearDirection() {
     if (this.esCentroCultural) {
-      this.direccionQuery = '';
-      this.direccionSeleccionada = null;
+      this.direccionQuery = this.DIRECCION_CENTRO_CULTURAL_DEFAULT.nomenclatura;
+      this.direccionSeleccionada = this.DIRECCION_CENTRO_CULTURAL_DEFAULT;
       this.sugerencias = [];
       this.mostrarSugerencias = false;
       this.sinResultados = false;
+    } else {
+      this.direccionQuery = '';
+      this.direccionSeleccionada = null;
     }
   }
 
